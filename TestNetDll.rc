@@ -1,0 +1,325 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Simplified, PRC) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\TestNetDll.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""afxres.rc""     // 标准组件\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\TestNetDll.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_TESTNETDLL_DIALOG DIALOGEX 0, 0, 603, 429
+STYLE DS_SETFONT | DS_MODALFRAME | WS_MINIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "网络SDK测试程序"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_TREE1,"SysTreeView32",WS_BORDER | WS_HSCROLL | WS_TABSTOP,7,27,108,205
+    GROUPBOX        "连接设备",IDC_STATIC,178,234,418,130
+    PUSHBUTTON      "增加辅助通道连接",IDC_ADD,522,266,72,14
+    LTEXT           "IP地址",IDC_STATIC,180,252,25,8
+    EDITTEXT        IDC_PTZIP,206,248,84,14,ES_AUTOHSCROLL
+    LTEXT           "通信端口",IDC_STATIC,296,252,33,8
+    EDITTEXT        IDC_PTZPORT,330,248,48,14,ES_AUTOHSCROLL
+    LTEXT           "登陆用户",IDC_STATIC,386,251,33,8
+    EDITTEXT        IDC_PTZUSER,418,247,44,14,ES_AUTOHSCROLL
+    LTEXT           "登陆密码",IDC_STATIC,469,249,33,8
+    EDITTEXT        IDC_PTZPASS,503,246,44,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "连接媒体",IDC_PLAY,395,269,37,14
+    CONTROL         "播放D1视频",IDC_PLAYD1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,337,271,56,10
+    EDITTEXT        IDC_VIDEOPORT,282,269,47,14,ES_AUTOHSCROLL
+    LTEXT           "视频端口",IDC_STATIC,248,273,32,8
+    CONTROL         "使用TCP播放",IDC_ISTCP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,183,271,60,10
+    CONTROL         "",IDC_VIDEORECT,"Static",SS_BLACKFRAME | SS_NOTIFY,117,7,221,155
+    PUSHBUTTON      "左",IDC_LEFT,513,93,25,14
+    PUSHBUTTON      "右",IDC_RIGHT,559,93,25,14
+    PUSHBUTTON      "上",IDC_UP,535,73,25,14
+    PUSHBUTTON      "下",IDC_DOWN,535,111,25,14
+    LTEXT           "亮度",IDC_STATIC,160,218,17,8
+    EDITTEXT        IDC_B,182,215,40,14,ES_AUTOHSCROLL
+    LTEXT           "CB饱和度",IDC_STATIC,228,217,33,8
+    EDITTEXT        IDC_CB,266,215,38,14,ES_AUTOHSCROLL
+    LTEXT           "CR饱和度",IDC_STATIC,308,218,33,8
+    EDITTEXT        IDC_CR,343,216,39,14,ES_AUTOHSCROLL
+    LTEXT           "对比度",IDC_STATIC,387,219,25,8
+    EDITTEXT        IDC_H,415,217,38,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "保存配置",IDC_SAVECONFIG,506,216,41,14
+    PUSHBUTTON      "读取配置",IDC_READCONFIG,460,216,41,14
+    PUSHBUTTON      "增加预置点",IDC_ADDPRESET,549,15,47,14
+    EDITTEXT        IDC_PRESET,485,16,58,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "查询预置点",IDC_CALLPRESET,549,35,47,14
+    PUSHBUTTON      "删除预置点",IDC_DELPRESET,495,35,47,14
+    COMBOBOX        IDC_COMBO2,502,52,94,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "静态",IDC_LASTALARMTEXT,181,291,310,8
+    PUSHBUTTON      "查询日志",IDC_SEARCHLOG,137,350,36,14
+    PUSHBUTTON      "上传配置",IDC_UPLOADCONFIG,253,345,35,14
+    LTEXT           "预置点",IDC_STATIC,474,54,26,10
+    CONTROL         "",IDC_LOGLIST,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,237,167,110
+    EDITTEXT        IDC_SELECTFILE,182,305,228,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "下载",IDC_DOWNLOADLOG,413,305,34,14
+    PUSHBUTTON      "启动日志",IDC_STARTWRITELOG,211,345,38,14
+    PUSHBUTTON      "重启设备",IDC_REBOOT,506,197,41,14
+    EDITTEXT        IDC_UPFILENAME,182,322,228,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "升级",IDC_STARTUPLOAD,413,322,34,14
+    PUSHBUTTON      "停止升级",IDC_STOPUPLOAD,451,321,36,15
+    PUSHBUTTON      "停止下载",IDC_STOPDOWN,451,305,36,14
+    PUSHBUTTON      "搜索录像",IDC_SEARCHAVI,91,350,40,14
+    PUSHBUTTON      "抓图",IDC_CAPIMAGE,304,168,35,14
+    PUSHBUTTON      "读取SN",IDC_READSN,460,197,41,14
+    PUSHBUTTON      "禁用",IDC_DISZOOM,118,168,31,14
+    PUSHBUTTON      "放大",IDC_ZOOMIN,152,168,34,14
+    PUSHBUTTON      "缩小",IDC_ZOOMOUT,189,168,33,14
+    PUSHBUTTON      "拖动",IDC_ZOOMMOVE,227,168,33,14
+    PUSHBUTTON      "满屏显示",IDC_FULLFILL,264,168,35,14
+    PUSHBUTTON      "搜索IPC",IDC_SEARCHIPC,552,215,41,14
+    LTEXT           "媒体流连接列表",IDC_STATIC,7,16,57,8
+    CONTROL         "",IDC_PTZLIST,"SysTreeView32",WS_BORDER | WS_HSCROLL | WS_TABSTOP,342,25,110,187
+    LTEXT           "辅助通道连接列表",IDC_STATIC,345,14,65,8
+    PUSHBUTTON      "G711广播开启",IDC_G711AUDIO,459,179,57,14
+    PUSHBUTTON      "停止广播",IDC_STOPAUDO,524,172,50,14
+    PUSHBUTTON      "AAC广播开启",IDC_AACAUDIO,459,163,58,14
+    PUSHBUTTON      "开始对讲",IDC_STARTIPCAUDIO,460,142,50,14
+    PUSHBUTTON      "关闭对讲",IDC_STOPIPCAUDIO,515,142,50,14
+    PUSHBUTTON      "下载配置",IDC_DOWNLOADCONFIG,291,345,43,14
+    PUSHBUTTON      "开始轮询",IDC_AUTOVIEWVIDEO,546,348,50,14
+    PUSHBUTTON      "播放文件",IDC_PLAYFILE,341,345,50,14
+    CONTROL         "音视频",IDC_INCLUDEAUDIO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,41,351,40,10
+    PUSHBUTTON      "停止播放",IDC_STOPPLAY,438,269,41,14
+    LTEXT           "时间间隔",IDC_STATIC,505,335,33,8
+    EDITTEXT        IDC_TIMEVALUE,539,332,57,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "配置设备",IDC_CONFIGIPC,551,198,41,14
+    PUSHBUTTON      "设备配置测试",IDC_TEST,535,391,61,14
+    PUSHBUTTON      "文件抓图",IDC_CAPBYFILE,289,189,50,14
+    PUSHBUTTON      "产生I帧",IDC_CREATEIFRAME,546,410,50,14
+    PUSHBUTTON      "读取用户数据",IDC_SAVEUSERDATA,493,410,50,14
+    PUSHBUTTON      "设置用户数据",IDC_SETUSERDATA,441,410,50,14
+    EDITTEXT        IDC_USERDATA,7,410,431,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "TestIt",IDC_BUTTONTEST1,552,292,35,30,BS_VCENTER
+END
+
+IDD_IPCSEARCH DIALOGEX 0, 0, 424, 276
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "搜索设备"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    PUSHBUTTON      "开始搜索",IDC_STARTSEARCH,367,255,50,14
+    CONTROL         "",IDC_LIST1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,7,7,403,200
+    LTEXT           "静态",IDC_ALLCOUNTMSG,7,215,243,8
+    PUSHBUTTON      "修改结构体方式",IDC_MODIFY1,91,255,66,14
+    PUSHBUTTON      "修改XML方式",IDC_MODIFY2,189,255,62,14
+END
+
+IDD_CONFIGIPCDLG DIALOGEX 0, 0, 565, 370
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,7,7,551,335
+    PUSHBUTTON      "连接",IDC_CONNECT,508,349,50,14
+END
+
+IDD_TESTIPCCONFIG_DIALOG DIALOGEX 0, 0, 684, 545
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "testipcconfig"
+FONT 9, "宋体", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "开始配置",IDC_BUTTON1,453,524,50,14
+    EDITTEXT        IDC_IP,37,524,117,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PORT,196,524,49,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_USRE,281,524,68,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_PASS,377,524,63,14,ES_AUTOHSCROLL
+    LTEXT           "IP地址",IDC_STATIC,7,530,25,8
+    LTEXT           "连接端口",IDC_STATIC,162,530,33,8
+    LTEXT           "用户名",IDC_STATIC,255,530,25,8
+    LTEXT           "密码",IDC_STATIC,357,530,17,8
+    PUSHBUTTON      "重新读取",IDC_RELOAD,514,524,50,14
+    PUSHBUTTON      "中文",IDC_CH,577,524,32,14
+    PUSHBUTTON      "英文",IDC_EN,618,524,32,14
+END
+
+IDD_IPCCONFIGREADER DIALOGEX 0, 0, 514, 338
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    EDITTEXT        IDC_RETTXT,7,7,500,276,ES_MULTILINE | ES_AUTOHSCROLL | WS_VSCROLL
+    PUSHBUTTON      "读取配置",IDC_READCONFIG,457,317,50,14
+    EDITTEXT        IDC_CONFIGID,372,317,84,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "系统控制",IDC_SYSTEMCONTROL,457,299,50,14
+    EDITTEXT        IDC_COMTROLVALUE,373,300,81,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_XMLMSG,7,299,359,32,ES_MULTILINE | ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,8,1
+ PRODUCTVERSION 1,0,8,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "CompanyName", "Demo"
+            VALUE "FileDescription", "Demo"
+            VALUE "FileVersion", "1.0.8.1"
+            VALUE "InternalName", "TestNetDll.exe"
+            VALUE "LegalCopyright", "Demo"
+            VALUE "OriginalFilename", "TestNetDll.exe"
+            VALUE "ProductName", "Demo"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_TESTNETDLL_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 596
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 424
+    END
+
+    IDD_IPCSEARCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 417
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 269
+    END
+
+    IDD_CONFIGIPCDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 558
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 363
+    END
+
+    IDD_TESTIPCCONFIG_DIALOG, DIALOG
+    BEGIN
+    END
+
+    IDD_IPCCONFIGREADER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 507
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 331
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Chinese (Simplified, PRC) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\TestNetDll.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "afxres.rc"     // 标准组件
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
