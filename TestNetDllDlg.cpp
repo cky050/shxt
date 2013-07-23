@@ -7,6 +7,8 @@
 #include "tinyxml.h"
 
 
+
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -246,8 +248,6 @@ void MyDC::ConstructBih(int nWidth,int nHeight,BITMAPINFOHEADER& bih)
 */
 
 
-
-
 int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_INFO * pFrameInfo)
 {
 	pFrameInfo->nWidth = pFrameInfo->nLinseSize[0];
@@ -302,15 +302,15 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
    */
 	//转成RGB
-	int i = 0;
-	int j = 0;
+	long long  i, j;
+	i=0;j=0;
 	double temp;
+	unsigned char y,u,v;
 	for( ;i < pFrameInfo->nWidth/4*pFrameInfo->nHeight; i++ )
 	{
-	   char y,u,v;
-	   y = yBuffer[4*i];
-	   u = uBuffer[i];
-	   v = vBuffer[i];// -128
+	   y = (unsigned char)yBuffer[4*i];
+	   u = (unsigned char)uBuffer[i];
+	   v = (unsigned char)vBuffer[i];// -128
 
 	   	temp = 1.164383*(y- 16) + 0 + 1.596016*(v - 128);
 		dBuffer[j] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
@@ -370,10 +370,10 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	To=pInverImage;
 	if(pInverImage)
 	{
-		for (DWORD H=0;H<240;H++)
+		for (DWORD H = 0;H < pFrameInfo->nHeight; H++)
 		{		
-			Start_Souce=dBuffer+WidthBytes*(240-H-1);  //Beging of Last Line          	
-			for (DWORD k=0;k<352*3;k++) //读入一行 mark
+			Start_Souce=dBuffer+WidthBytes*(pFrameInfo->nHeight-H-1);  //Beging of Last Line          	
+			for (DWORD k=0;k<pFrameInfo->nWidth*3;k++) //读入一行 mark
 			{
 				*(To++)=*(Start_Souce++);
 			}		
@@ -427,37 +427,41 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 		//AfxMessageBox("MyDC::SaveDIB2Bmp");
 	}
 	
+
+
+
 	//背景相减======================================================
 	char *lpImgData,*lpImgData2,*lpBGData;
 	char r,g,b,r1,g1,b1;
 
 	DWORD bytesPerLine=pFrameInfo->nWidth*3;//计算每行图像所占的字节数
-	if(bytesPerLine%4!=0)
-	{
-		bytesPerLine=(bytesPerLine/4+1)*4;
-	}
+	//if(bytesperline%4 != 0)
+	//{
+	//	bytesperline=(bytesperline/4 + 1)*4;
+	//}
 
-	BYTE deta = 50;//背景差分法阈值，可调节
+
+	BYTE deta = 220;//背景差分法阈值，可调节
 	
 
-	for( int i = 0; i < pFrameInfo->nHeight; i ++ )
+	for( i = 0; i < pFrameInfo->nHeight; i++ )
 	{	
-		for( int j = 0; j < pFrameInfo->nWidth; j ++ )
+		for( j = 0; j < pFrameInfo->nWidth; j++ )
 		{
-			lpImgData= dBuffer +bytesPerLine*(pFrameInfo->nHeight-1-i)+j*3;
+			lpImgData= dBuffer + bytesPerLine*(pFrameInfo->nHeight-1-i)+j*3;
 			lpImgData2 = lpImgData;
 			b=*(lpImgData++);
 			g=*(lpImgData++);
 			r=*(lpImgData++);
 
-			lpBGData= m_pBGbuffer +bytesPerLine*(pFrameInfo->nHeight-1-i)+j*3;
+			lpBGData= m_pBGbuffer + bytesPerLine*(pFrameInfo->nHeight-1-i)+j*3;
 			b1=*(lpBGData++);
 			g1=*(lpBGData++);
 			r1=*(lpBGData++);
 
 			
 		//	if(abs((long)(b-b1)) <=deta )//像素没有变化，认为是背景
-			if(abs((long)(b-b1))<=deta)
+			if( abs(b-b1)<=deta || abs(g-g1)<=deta || abs(r-r1)<=deta )
 			{
 				*(lpImgData2++) = 255;
 				*(lpImgData2++) = 255;
@@ -1176,8 +1180,8 @@ void CTestNetDllDlg::OnBnClickedPlay()
 			pItem->m_nPlayPort=nowPortIndex++;//指定为1号播放播放此视频
 			pItem->m_nHaveSetup=0;
 			pItem->m_nStreamId=retValue;
-		//	CWnd * pCWnd=GetDlgItem(IDC_VIDEORECT);
-		//	pItem->m_hPlayHwnd=pCWnd->m_hWnd;
+			CWnd * pCWnd=GetDlgItem(IDC_VIDEORECT);
+			pItem->m_hPlayHwnd=pCWnd->m_hWnd;
 		}
 
 		pItem=playlist[m_lRealHandle];
