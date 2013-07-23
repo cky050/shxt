@@ -11,3 +11,6 @@
 *.idb
 \*.log
 *.log
+*.exe
+*.exe.embed.manifest.res
+*_manifest.rc
