@@ -9,4 +9,4 @@
 *.pch
 *.pdb
 *.idb
-*.log
+\*.log
