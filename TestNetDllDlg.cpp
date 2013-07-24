@@ -250,13 +250,8 @@ void MyDC::ConstructBih(int nWidth,int nHeight,BITMAPINFOHEADER& bih)
 
 int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_INFO * pFrameInfo)
 {
-	pFrameInfo->nWidth = pFrameInfo->nLinseSize[0];
-
-
-
+	//pFrameInfo->nWidth = pFrameInfo->nLinseSize[0];
 	TRACE1("recv media data len=%d,is video=%d\r\n",nSize,pFrameInfo->bIsVideo);
-
-
 
 	//4:1:1
 	//长度为:pFrameInfo->nHeight* pFrameInfo->nLinseSize[0];
@@ -267,7 +262,6 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	
 	//长度为:pFrameInfo->nHeight * pFrameInfo->nLinseSize[2]/2;
 	char * vBuffer= uBuffer + pFrameInfo->nHeight * pFrameInfo->nLinseSize[1]/2;
-
 
 
 	char *dBuffer = new char[3*pFrameInfo->nWidth*pFrameInfo->nHeight];///////////////////////////////////////////////////
@@ -302,60 +296,31 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
    */
 	//转成RGB
-	long long  i, j;
-	i=0;j=0;
+	long long  i = 0, j = 0, k = 0;
 	double temp;
 	unsigned char y,u,v;
-	for( ;i < pFrameInfo->nWidth/4*pFrameInfo->nHeight; i++ )
+
+	for( ;i < pFrameInfo->nLinseSize[1]/2*pFrameInfo->nHeight; i++ )
 	{
-	   y = (unsigned char)yBuffer[4*i];
 	   u = (unsigned char)uBuffer[i];
-	   v = (unsigned char)vBuffer[i];// -128
+	   v = (unsigned char)vBuffer[i];
 
-	   	temp = 1.164383*(y- 16) + 0 + 1.596016*(v - 128);
-		dBuffer[j] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = (1.164383*(y- 16) - 0.391762*(u - 128) - 0.812969*(v - 128));
-		dBuffer[j + 1] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = 1.164383*(y- 16) + 2.017230*(u - 128) + 0;
-		dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-	   //dBuffer[j + 3] = 0;
-	   j+=3;
+	   k = 0;
+	   for( ; k < 4;k++ )
+	   {
+		   y = (unsigned char)yBuffer[4*i + k];
+		   temp = 1.164383*(y- 16) + 0 + 1.596016*(v - 128);
+		   dBuffer[j] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
+		   temp = (1.164383*(y- 16) - 0.391762*(u - 128) - 0.812969*(v - 128));
+		   dBuffer[j + 1] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
+		   temp = 1.164383*(y- 16) + 2.017230*(u - 128) + 0;
+		   dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
+		   j+=3;
+	   }
 
-	   y = yBuffer[4*i+1];
-	   	temp = 1.164383*(y- 16) + 0 + 1.596016*(v - 128);
-		dBuffer[j] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = (1.164383*(y- 16) - 0.391762*(u - 128) - 0.812969*(v - 128));
-		dBuffer[j + 1] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = 1.164383*(y- 16) + 2.017230*(u - 128) + 0;
-		dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-	   //dBuffer[j + 3] = 0;
-	   j+=3;
-
-	   y = yBuffer[4*i+2];
-	   	temp = 1.164383*(y- 16) + 0 + 1.596016*(v - 128);
-		dBuffer[j] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = (1.164383*(y- 16) - 0.391762*(u - 128) - 0.812969*(v - 128));
-		dBuffer[j + 1] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = 1.164383*(y- 16) + 2.017230*(u - 128) + 0;
-		dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-	   //dBuffer[j + 3] = 0;
-	   j+=3;
-
-	   y = yBuffer[4*i+3];
-	   	temp = 1.164383*(y- 16) + 0 + 1.596016*(v - 128);
-		dBuffer[j] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = (1.164383*(y- 16) - 0.391762*(u - 128) - 0.812969*(v - 128));
-		dBuffer[j + 1] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-		temp = 1.164383*(y- 16) + 2.017230*(u - 128) + 0;
-		dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
-	   //dBuffer[j + 3] = 0;
-	   j+=3;
-
-	  // if( i%88 == 79 )
-		//   i+=8;
+	   if( i%(pFrameInfo->nLinseSize[1]/2) == (pFrameInfo->nWidth/4 - 1) )
+		   i+=( (pFrameInfo->nLinseSize[1]/2) - (pFrameInfo->nWidth/4) );
 	}
-
-
 
 
 
@@ -441,7 +406,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	//}
 
 
-	BYTE deta = 220;//背景差分法阈值，可调节
+	BYTE deta = 100;//背景差分法阈值，可调节
 	
 
 	for( i = 0; i < pFrameInfo->nHeight; i++ )
@@ -925,7 +890,7 @@ BOOL CTestNetDllDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// 设置大图标
 	SetIcon(m_hIcon, FALSE);		// 设置小图标
 
-	SetDlgItemText(IDC_PTZIP,_T("192.168.3.254"));
+	SetDlgItemText(IDC_PTZIP,_T("192.168.0.254"));
 	SetDlgItemText(IDC_PTZPORT,_T("8091"));
 
 

@@ -64,7 +64,7 @@ BOOL CIpcConfigTestDlg::OnInitDialog()
 	m_pDlg->SetWindowPos(NULL,0,0,rect.right,rect.bottom,0);
 	m_pDlg->ShowWindow(SW_SHOW);
 	SetDlgItemInt(IDC_PORT,8091);
-	SetDlgItemText(IDC_IP,_T("192.168.3.254"));
+	SetDlgItemText(IDC_IP,_T("192.168.0.254"));
 	SetDlgItemText(IDC_USRE,_T("admin"));
 	SetDlgItemText(IDC_PASS,_T("123456"));
 
