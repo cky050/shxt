@@ -14,3 +14,4 @@
 *.exe
 *.exe.embed.manifest.res
 *_manifest.rc
+*.suo
