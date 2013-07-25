@@ -461,6 +461,8 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	
 	Del_Noise(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight, 6);
 	Del_Noise(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight, 7);
+
+	//for......
 	QuanFangXiangFuShi(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
 	QuanFangXiangPengZhang(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
 	
