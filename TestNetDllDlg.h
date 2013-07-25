@@ -161,7 +161,7 @@ public:
 //	afx_msg void OnClickedButtontest2();
 
 public:
-	char *m_pBGbuffer;
+	BYTE *m_pBGbuffer;
 	void Del_Noise(BYTE *pImageBuffer, const long nWidth, const long nHeight, const int points);
 	void QuanFangXiangFuShi(BYTE *pImageBuffer, const long nWidth, const long nHeight);
 	void QuanFangXiangPengZhang(BYTE *pImageBuffer, const long nWidth, const long nHeight);

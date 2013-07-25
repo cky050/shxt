@@ -254,7 +254,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 
 
 
-	char *dBuffer = new char[3*pFrameInfo->nWidth*pFrameInfo->nHeight];
+	BYTE *dBuffer = new BYTE[3*pFrameInfo->nWidth*pFrameInfo->nHeight];
 	
 
 	BITMAPINFOHEADER bih;
@@ -319,9 +319,9 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	DWORD WidthBytes = pFrameInfo->nWidth * 3;	
 	while((WidthBytes & 3) != 0)WidthBytes++;
 
-	char *Start_Souce,*To,*pInverImage;
+	BYTE *Start_Souce,*To,*pInverImage;
 	DWORD Size=WidthBytes*pFrameInfo->nHeight;
-	pInverImage=new char[Size];
+	pInverImage=new BYTE[Size];
 
 	To=pInverImage;
 	if(pInverImage)
@@ -336,7 +336,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 		}		
 	}
 
-	char *tempBuffer = dBuffer;
+	BYTE *tempBuffer = dBuffer;
 	dBuffer = pInverImage;
 	delete []tempBuffer;
 
@@ -348,7 +348,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 
 	if(m_pBGbuffer == NULL)
 	{
-		m_pBGbuffer = new char[3*pFrameInfo->nWidth*pFrameInfo->nHeight];
+		m_pBGbuffer = new BYTE[3*pFrameInfo->nWidth*pFrameInfo->nHeight];
 		memcpy(m_pBGbuffer,dBuffer,3*pFrameInfo->nWidth*pFrameInfo->nHeight);
 
 		try
@@ -388,8 +388,8 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 
 
 	//背景相减======================================================
-	char *lpImgData,*lpImgData2,*lpBGData;
-	char r,g,b,r1,g1,b1;
+	BYTE *lpImgData,*lpImgData2,*lpBGData;
+	BYTE r,g,b,r1,g1,b1;
 
 	DWORD bytesPerLine=pFrameInfo->nWidth*3;//计算每行图像所占的字节数
 	//if(bytesperline%4 != 0)
@@ -449,6 +449,28 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 			file.Write((LPSTR)&bfh,sizeof(BITMAPFILEHEADER));
 			file.Write((LPSTR)&bih,sizeof(BITMAPINFOHEADER));
 			file.Write(dBuffer,3*pFrameInfo->nWidth*pFrameInfo->nHeight);///////////////////////////////
+			file.Close();
+		}
+	}
+	catch (...) 
+	{
+		file.Close();
+		//AfxMessageBox("MyDC::SaveDIB2Bmp");
+	}
+
+	
+	Del_Noise(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight, 6);
+	Del_Noise(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight, 7);
+	QuanFangXiangFuShi(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
+	QuanFangXiangPengZhang(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
+	
+	try
+	{
+		if(file.Open(_T("E:\\b_set_2.bmp"),CFile::modeWrite | CFile::modeCreate,&e) )
+		{//写入文件
+			file.Write((LPSTR)&bfh,sizeof(BITMAPFILEHEADER));
+			file.Write((LPSTR)&bih,sizeof(BITMAPINFOHEADER));
+			file.Write(dBuffer,3*pFrameInfo->nWidth*pFrameInfo->nHeight);
 			file.Close();
 		}
 	}
