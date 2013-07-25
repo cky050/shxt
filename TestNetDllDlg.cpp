@@ -7,8 +7,6 @@
 #include "tinyxml.h"
 
 
-
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -37,7 +35,6 @@ int  CALLBACK  OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_INFO * pF
 	}
 	return 0;
 }
-
 
 
 LONG CALLBACK OnPlayActionEvent(LONG lUser,LONG nType,LONG nFlag,char * pData,void * pUser)
@@ -81,13 +78,6 @@ LONG   CTestNetDllDlg::OnPlayerStateEvent(long nPort,LONG nStateCode,char *pResp
 	TRACE0("recv event code=%d\r\n",nStateCode);
 	return 0;
 }
-
-
-
-
-
-
-
 
 
 
@@ -250,7 +240,6 @@ void MyDC::ConstructBih(int nWidth,int nHeight,BITMAPINFOHEADER& bih)
 
 int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_INFO * pFrameInfo)
 {
-	//pFrameInfo->nWidth = pFrameInfo->nLinseSize[0];
 	TRACE1("recv media data len=%d,is video=%d\r\n",nSize,pFrameInfo->bIsVideo);
 
 	//4:1:1
@@ -264,11 +253,12 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	char * vBuffer= uBuffer + pFrameInfo->nHeight * pFrameInfo->nLinseSize[1]/2;
 
 
-	char *dBuffer = new char[3*pFrameInfo->nWidth*pFrameInfo->nHeight];///////////////////////////////////////////////////
+
+	char *dBuffer = new char[3*pFrameInfo->nWidth*pFrameInfo->nHeight];
 	
 
 	BITMAPINFOHEADER bih;
-	bih.biSize=40;       // header size
+	bih.biSize=40;		// header size
 	bih.biWidth=pFrameInfo->nWidth;
 	bih.biHeight=pFrameInfo->nHeight;
 	bih.biPlanes=1;
@@ -296,7 +286,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
    */
 	//转成RGB
-	long long  i = 0, j = 0, k = 0;
+	long i = 0, j = 0, k = 0;
 	double temp;
 	unsigned char y,u,v;
 
@@ -318,6 +308,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 		   j+=3;
 	   }
 
+	   //除去多余部分
 	   if( i%(pFrameInfo->nLinseSize[1]/2) == (pFrameInfo->nWidth/4 - 1) )
 		   i+=( (pFrameInfo->nLinseSize[1]/2) - (pFrameInfo->nWidth/4) );
 	}
@@ -329,7 +320,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	while((WidthBytes & 3) != 0)WidthBytes++;
 
 	char *Start_Souce,*To,*pInverImage;
-	DWORD Size=WidthBytes*pFrameInfo->nHeight; //352*240
+	DWORD Size=WidthBytes*pFrameInfo->nHeight;
 	pInverImage=new char[Size];
 
 	To=pInverImage;
@@ -348,6 +339,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	char *tempBuffer = dBuffer;
 	dBuffer = pInverImage;
 	delete []tempBuffer;
+
 
 
 
@@ -470,6 +462,201 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	delete []dBuffer;
 	return 0;
 }
+
+
+
+/*!
+* @brief Del_Noise
+*
+* 图像去噪，八临域去噪
+* @param pImageBuffer 当前帧图像信息
+* @param WidthBytes 每行比特数
+* @param points 临域白点数目
+*/
+void CTestNetDllDlg::Del_Noise(BYTE *pImageBuffer, const long nWidth, const long nHeight, const int points)
+{
+	long WidthBytes = nWidth*3;
+	long nn, mm;
+	BYTE *lpSrc,*lpSrc1,*lpTemp1,*lpTemp2,*lpTemp3,*lpTemp4,*lpTemp5,*lpTemp6,*lpTemp7,*lpTemp8;
+
+	for( nn=1;nn<nHeight-1;nn++ )
+	{
+		for( mm=1;mm<nWidth-1;mm++ )
+		{
+			lpSrc = (BYTE *)pImageBuffer+WidthBytes*nn+mm*3;//WidthBytes
+			lpTemp5=(BYTE *)pImageBuffer+WidthBytes*(nn-1)+(mm-1)*3;//左上
+			lpTemp1=(BYTE *)pImageBuffer+WidthBytes*(nn-1)+mm*3;//上
+			lpTemp6=(BYTE *)pImageBuffer+WidthBytes*(nn-1)+(mm+1)*3;//右上
+			lpTemp7=(BYTE *)pImageBuffer+WidthBytes*(nn+1)+(mm-1)*3;//左下
+			lpTemp2=(BYTE *)pImageBuffer+WidthBytes*(nn+1)+mm*3;//下
+			lpTemp8=(BYTE *)pImageBuffer+WidthBytes*(nn+1)+(mm+1)*3;//右下
+			lpTemp3=(BYTE *)pImageBuffer+WidthBytes*nn+(mm-1)*3;//左
+			lpTemp4=(BYTE *)pImageBuffer+WidthBytes*nn+(mm+1)*3;//右
+
+			unsigned long p1,p2,p3,p4,p5,p6,p7,p8,e;
+			p1=p2=p3=p4=p5=p6=p7=p8=e=0;
+			p1=*lpTemp1+*(lpTemp1+1)+*(lpTemp1+2);
+			p2=*lpTemp2+*(lpTemp2+1)+*(lpTemp2+2);
+			p3=*lpTemp3+*(lpTemp3+1)+*(lpTemp3+2);
+			p4=*lpTemp4+*(lpTemp4+1)+*(lpTemp4+2);
+			p5=*lpTemp5+*(lpTemp5+1)+*(lpTemp5+2);
+			p6=*lpTemp6+*(lpTemp6+1)+*(lpTemp6+2);
+			p7=*lpTemp7+*(lpTemp7+1)+*(lpTemp7+2);
+			p8=*lpTemp8+*(lpTemp8+1)+*(lpTemp8+2);
+
+			lpSrc1 = lpSrc;
+			e = *lpSrc1 + *(lpSrc1+1) + *(lpSrc1 + 2);//如果此点已是白点就不用再管他了
+
+			if((e != 765 && (int)(p1+p2+p3+p4+p5+p6+p7+p8) >= 255*3*points))//如果周围的八个点中有points以上个白点 则置此点为白点
+			{
+				*lpSrc = 255;
+				*(lpSrc+1)=255;
+				*(lpSrc+2)=255;
+			}
+		}
+	}
+
+}
+
+
+
+
+/*!
+* @brief QuanFangXiangFuShi
+*
+* 形态学处理，腐蚀操作
+* @param pImageBuffer 当前帧图像信息
+* @param width DIB的宽度
+* @param height DIB的高度
+* @param bytesPerLine 图像每行字节数
+*/
+void CTestNetDllDlg::QuanFangXiangFuShi(BYTE *pImageBuffer, const long nWidth, const long nHeight)
+{
+	long bytesPerLine = nWidth*3;
+	long i, j, m, n;
+
+	LPBYTE p_data; 	//指向DIB象素指针
+	LPBYTE lpSrc; 	//指向源图像的指针
+	LPBYTE lpDst; 	//指向缓存图像的指针
+
+	p_data = pImageBuffer; 	//找到DIB图像象素起始位置
+
+	BYTE *p_temp=new BYTE[nHeight*bytesPerLine];
+
+	int B[9] = {0, 1, 0,
+				0, 1, 0,
+				0, 1, 0}; 	//3×3的结构元素
+
+	for ( j = 1; j < nHeight-1; j++ ) 	//使用全方向的结构元素进行腐蚀
+	{
+		for ( i = 3; i < bytesPerLine-3; i+=3 )	//由于使用3×3的结构元素，为防止越界，所以不处理最左、右、上、下四边的像素
+		{
+			lpSrc = (unsigned char *)(p_data + bytesPerLine * j + i); //指向源图像倒数第j行，第i个象素的指针			
+
+			lpDst = (unsigned char *)(p_temp + bytesPerLine * j + i);//指向目标图像倒数第j行，第i个象素的指针			
+
+			*lpDst = 0; // 目标图像中的当前点先赋成黑色
+			*(lpDst+1)=0;
+			*(lpDst+2)=0;
+
+
+			//如果源图像中3×3结构元素对应位置有白点,则将目标图像中的(0,0)点赋成白色
+
+			for(int l=0;l<3;l++)
+			{
+				for (m = 0; m < 3; m++)
+				{
+					for (n = 0; n < 3; n++)
+					{
+						if (B[m + n] == 1)
+							continue;
+						if (*(lpSrc + (1 - m) * bytesPerLine +(n - 1)*3 ) > 128)//m=0,1,2,当m=0时,是第三行,m=1时是第二行,m=2时是第一行
+						{
+							*lpDst = 255;
+							break;
+						}
+						else 
+							*lpDst = *lpSrc;
+					}
+				}
+				*lpSrc++;
+				*lpDst++;
+			}
+		}
+	}
+	memcpy(p_data, p_temp, bytesPerLine * nHeight); //复制腐蚀后的图像
+
+	delete []p_temp;//释放内存
+}
+
+
+/*!
+* @brief QuanFangXiangPengZhang
+*
+* 形态学处理，膨胀操作
+* @param pImageBuffer 当前帧图像信息
+* @param width DIB的宽度
+* @param height DIB的高度
+* @param bytesPerLine 图像每行字节数
+*/
+void CTestNetDllDlg::QuanFangXiangPengZhang(BYTE *pImageBuffer, const long nWidth, const long nHeight)
+{
+	long bytesPerLine = nWidth*3;
+	long i, j, m, n;
+
+	LPBYTE p_data; 	// 指向DIB象素指针
+	LPBYTE lpSrc;	// 指向源图像的指针
+	LPBYTE lpDst;	// 指向缓存图像的指针
+	
+	p_data = pImageBuffer;	// 找到DIB图像象素起始位置
+
+	BYTE *p_temp=new BYTE[nHeight*bytesPerLine];
+
+	if(p_temp==NULL)
+	{
+		MessageBox(_T("申请内存失败!"));
+		return;
+	}
+	int B[9] = {1, 0, 1,
+				0, 0, 0,
+				1, 0, 1}; 	// 3×3的结构元素
+
+	for (j = 1; j <  nHeight-1; j++)	// 使用全方向的结构元素进行碰撞
+	{
+		for (i = 3; i < bytesPerLine-3; i +=3)
+		{
+			lpSrc = (unsigned char *)(p_data + bytesPerLine * j + i);
+			lpDst = (unsigned char *)(p_temp + bytesPerLine * j + i);
+			*lpDst = *lpSrc;			 
+			*(lpDst+1) = *(lpSrc+1);
+			*(lpDst+2) = *(lpSrc+2);
+			for(int l=0;l<3;l++)
+			{
+				for (m = 0; m < 3; m++)
+				{
+					for (n = 0; n < 3; n++)
+					{
+						if (B[m + n] == 1)
+							continue;
+						if (*(lpSrc + (1 - m) * bytesPerLine +(n - 1)*3 ) < 128)
+						{
+							*lpDst = 0;	
+							break;
+						}
+					}
+				}
+				*lpSrc++;
+				*lpDst++;
+			}
+		}
+	}
+
+
+	memcpy(p_data, p_temp, bytesPerLine * nHeight );
+	delete []p_temp;
+}
+
+
 
 
 //void CTestNetDllDlg::InverImage(char *lpData)
@@ -700,7 +887,7 @@ BEGIN_MESSAGE_MAP(CTestNetDllDlg, CDialog)
 	ON_BN_CLICKED(IDC_SAVEUSERDATA, &CTestNetDllDlg::OnBnClickedSaveuserdata)
 	ON_BN_CLICKED(IDC_SETUSERDATA, &CTestNetDllDlg::OnBnClickedSetuserdata)
 	ON_BN_CLICKED(IDC_TEST, &CTestNetDllDlg::OnBnClickedTest)
-	ON_BN_CLICKED(IDC_BUTTONTEST1, &CTestNetDllDlg::OnClickedButtonTest1)
+//	ON_BN_CLICKED(IDC_BUTTONTEST1, &CTestNetDllDlg::OnClickedButtonTest1)
 //	ON_BN_CLICKED(IDC_BUTTONTEST2, &CTestNetDllDlg::OnClickedButtontest2)
 END_MESSAGE_MAP()
 
@@ -2186,39 +2373,39 @@ void CTestNetDllDlg::OnBnClickedTest()
 }
 
 
-void CTestNetDllDlg::OnClickedButtonTest1()
-{
-	// TODO: Add your control notification handler code here
-	VIDEO_PARAM param;
-	IP_NET_DVR_GetVideoParam(m_lRealHandle,&param);
-	
-	TRACE1("%s\n",param.codec);
-
+//void CTestNetDllDlg::OnClickedButtonTest1()
+//{
+//	// TODO: Add your control notification handler code here
+//	VIDEO_PARAM param;
+//	IP_NET_DVR_GetVideoParam(m_lRealHandle,&param);
+//	
+//	TRACE1("%s\n",param.codec);
+//
 //	::MessageBoxA(NULL,(LPCSTR)param.codec,"aa",MB_OK);
-	int width = param.width;
-	int height = param.height;
-	int colorbits = param.colorbits;
-	int framerate = param.framerate;
-	int bitrate = param.bitrate;
+//	int width = param.width;
+//	int height = param.height;
+//	int colorbits = param.colorbits;
+//	int framerate = param.framerate;
+//	int bitrate = param.bitrate;
 //	::MessageBoxA(NULL,(LPCSTR)param.vol_data,"aa",MB_OK);
-
-	BYTE *pByte = new BYTE[width*height*2];
-	memset(pByte,0,(width*height*2));
-	long xxxx = sizeof(pByte);
-	long yyyy = sizeof(*pByte);
-
-
-	TRACE1("%s\n",pByte);
+//
+//	BYTE *pByte = new BYTE[width*height*2];
+//	memset(pByte,0,(width*height*2));
+//	long xxxx = sizeof(pByte);
+//	long yyyy = sizeof(*pByte);
+//
+//
+//	TRACE1("%s\n",pByte);
 //	IP_TPS_InputVideoData(LONG nPort,PBYTE pBuf,DWORD nSize,int isKey,DWORD timestamp);
-	DWORD nSize = width*height*2;
-
-	int zzzz = nowPortIndex;
-	IP_TPS_InputVideoData(nowPortIndex-1,pByte,nSize,1,1.1);
-	TRACE1("%s\n",pByte);
-
-	
-	delete []pByte;
-}
+//	DWORD nSize = width*height*2;
+//
+//	int zzzz = nowPortIndex;
+//	IP_TPS_InputVideoData(nowPortIndex-1,pByte,nSize,1,1.1);
+//	TRACE1("%s\n",pByte);
+//
+//	
+//	delete []pByte;
+//}
 
 
 //void CTestNetDllDlg::OnClickedButtontest2()

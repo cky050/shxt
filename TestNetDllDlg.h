@@ -157,10 +157,14 @@ public:
 	afx_msg void OnBnClickedTest();
 	CReadIpcConfig readIpcConfig;
 	CIpcSearchDlg m_searchDlg;
-	afx_msg void OnClickedButtonTest1();
+//	afx_msg void OnClickedButtonTest1();
 //	afx_msg void OnClickedButtontest2();
 
 public:
 	char *m_pBGbuffer;
+	void Del_Noise(BYTE *pImageBuffer, const long nWidth, const long nHeight, const int points);
+	void QuanFangXiangFuShi(BYTE *pImageBuffer, const long nWidth, const long nHeight);
+	void QuanFangXiangPengZhang(BYTE *pImageBuffer, const long nWidth, const long nHeight);
+	
 };
 
