@@ -240,9 +240,7 @@ void MyDC::ConstructBih(int nWidth,int nHeight,BITMAPINFOHEADER& bih)
 
 int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_INFO * pFrameInfo)
 {
-	TRACE1("recv media data len=%d,is video=%d\r\n",nSize,pFrameInfo->bIsVideo);
-
-	//4:1:1
+	//4:1:1   //转成RGB
 	//长度为:pFrameInfo->nHeight* pFrameInfo->nLinseSize[0];
 	char * yBuffer= pBuf+16;
 	
@@ -251,7 +249,6 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	
 	//长度为:pFrameInfo->nHeight * pFrameInfo->nLinseSize[2]/2;
 	char * vBuffer= uBuffer + pFrameInfo->nHeight * pFrameInfo->nLinseSize[1]/2;
-
 
 
 	BYTE *dBuffer = new BYTE[3*pFrameInfo->nWidth*pFrameInfo->nHeight];
@@ -285,11 +282,9 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	temp = 1.164383*(y- 16) + 2.017230*(u - 128) + 0;
 	dBuffer[j + 2] = (unsigned char)(temp < 0 ? 0 : (temp > 255 ? 255 : temp));
    */
-	//转成RGB
 	long i = 0, j = 0, k = 0;
 	double temp;
 	unsigned char y,u,v;
-
 	for( ;i < pFrameInfo->nLinseSize[1]/2*pFrameInfo->nHeight; i++ )
 	{
 	   u = (unsigned char)uBuffer[i];
@@ -314,8 +309,8 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	}
 
 
-
-	//每行比特数
+	
+	//倒转图像
 	DWORD WidthBytes = pFrameInfo->nWidth * 3;	
 	while((WidthBytes & 3) != 0)WidthBytes++;
 
@@ -335,11 +330,10 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 			}		
 		}		
 	}
-
 	BYTE *tempBuffer = dBuffer;
 	dBuffer = pInverImage;
 	delete []tempBuffer;
-
+	
 
 
 
@@ -398,7 +392,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	//}
 
 
-	BYTE deta = 100;//背景差分法阈值，可调节
+	BYTE deta = 95;//背景差分法阈值，可调节
 	
 
 	for( i = 0; i < pFrameInfo->nHeight; i++ )
@@ -459,12 +453,13 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	}
 
 	
+	//去除杂点
 	Del_Noise(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight, 6);
 	Del_Noise(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight, 7);
-
-	//for......
-	QuanFangXiangFuShi(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
-	QuanFangXiangPengZhang(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
+	for( i = 0; i < 5; i++ )
+		QuanFangXiangFuShi(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
+	for( i = 0; i < 5; i++ )
+		QuanFangXiangPengZhang(dBuffer, pFrameInfo->nWidth, pFrameInfo->nHeight);
 	
 	try
 	{
@@ -482,6 +477,69 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 		//AfxMessageBox("MyDC::SaveDIB2Bmp");
 	}
 
+
+	//EdgeDetection
+	D2POINT ImageEdgePoints[1000];//存放分割手势的边缘点
+	D2POINT ImageEdgePoints1[1000];
+	D2POINT ImageEdgePoints2[1000];
+	/*
+	EdgeDetection(ImageEdgePoints,dBuffer,pFrameInfo->nWidth,pFrameInfo->nHeight);
+	double max_num = 0.0,min_num = 0.0;//y coordinates
+	for ( i = 0;i < edgepointsNO;i++ ) //统计参与交互胳膊的长度
+	{
+		if (max_num < ImageEdgePoints[i].y)
+		{
+			max_num = ImageEdgePoints[i].y;
+		}
+		if (min_num > ImageEdgePoints[i].y)
+		{
+			min_num = ImageEdgePoints[i].y;
+		}
+	}
+
+	double asdfasdfadsf = abs(max_num - min_num);///////////////////////////////////////
+	*/
+
+	EdgeDetection_2user(ImageEdgePoints1,ImageEdgePoints2,dBuffer,pFrameInfo->nWidth,pFrameInfo->nHeight);
+	double max_num = 0.0,min_num = 0.0;//y coordinates
+	for ( i = 0;i < edgepointsNO1;i++ ) //统计参与交互胳膊的长度
+	{
+		if (max_num < ImageEdgePoints1[i].y)
+		{
+			max_num = ImageEdgePoints1[i].y;
+		}
+		if (min_num > ImageEdgePoints1[i].y)
+		{
+			min_num = ImageEdgePoints1[i].y;
+		}
+	}
+	double tempaaaaaa = abs(max_num-min_num);
+	max_num = 0.0,min_num = 0.0;//y coordinates
+	for ( i = 0;i < edgepointsNO2;i++ ) //统计参与交互胳膊的长度
+	{
+		if (max_num < ImageEdgePoints2[i].y)
+		{
+			max_num = ImageEdgePoints2[i].y;
+		}
+		if (min_num > ImageEdgePoints2[i].y)
+		{
+			min_num = ImageEdgePoints2[i].y;
+		}
+	}
+
+
+	FILE *sp;
+	try
+	{
+		sp=fopen("E:\\Pose.txt","w");
+		fprintf(sp,"%lf\n%lf\n",tempaaaaaa,abs(max_num-min_num));
+		fclose(sp);
+	}
+	catch(...)
+	{
+		fclose(sp);
+	}
+		
 
 	delete []dBuffer;
 	return 0;
@@ -679,6 +737,178 @@ void CTestNetDllDlg::QuanFangXiangPengZhang(BYTE *pImageBuffer, const long nWidt
 	memcpy(p_data, p_temp, bytesPerLine * nHeight );
 	delete []p_temp;
 }
+
+
+void CTestNetDllDlg::EdgeDetection(D2POINT edgepoint[], BYTE *pBuffer,const long nWidth,const long nHeight)
+{
+	edgepointsNO = 0; //记录总的像素个数
+
+	DWORD WidthBytes = 3* nWidth;//图像的一行字节数
+	BYTE *lpSrc,  *lpTemp1,*lpTemp2,*lpTemp3,*lpTemp4,*lpTemp5,*lpTemp6,*lpTemp7,*lpTemp8;
+	BYTE r,g,b;
+	long nn, mm ;
+	
+	for( nn = 1; nn < nHeight-1; nn=nn+5)
+	{
+		for( mm = 1; mm < nWidth-1; mm=mm+5)
+		{			
+			lpSrc=(BYTE *)pBuffer+WidthBytes*nn+mm*3;//WidthBytes
+			lpTemp5=(BYTE *)pBuffer+WidthBytes*(nn-1)+(mm-1)*3;//左上
+			lpTemp1=(BYTE *)pBuffer+WidthBytes*(nn-1)+mm*3;//上
+			lpTemp6=(BYTE *)pBuffer+WidthBytes*(nn-1)+(mm+1)*3;//右上
+			lpTemp7=(BYTE *)pBuffer+WidthBytes*(nn+1)+(mm-1)*3;//左下
+			lpTemp2=(BYTE *)pBuffer+WidthBytes*(nn+1)+mm*3;//下
+			lpTemp8=(BYTE *)pBuffer+WidthBytes*(nn+1)+(mm+1)*3;//右下
+			lpTemp3=(BYTE *)pBuffer+WidthBytes*nn+(mm-1)*3;//左
+			lpTemp4=(BYTE *)pBuffer+WidthBytes*nn+(mm+1)*3;//右
+
+			unsigned long p1,p2,p3,p4,p5,p6,p7,p8;
+			p1=p2=p3=p4=p5=p6=p7=p8=0;
+			p1=*lpTemp1+*(lpTemp1+1)+*(lpTemp1+2);
+			p2=*lpTemp2+*(lpTemp2+1)+*(lpTemp2+2);
+			p3=*lpTemp3+*(lpTemp3+1)+*(lpTemp3+2);
+			p4=*lpTemp4+*(lpTemp4+1)+*(lpTemp4+2);
+			p5=*lpTemp5+*(lpTemp5+1)+*(lpTemp5+2);
+			p6=*lpTemp6+*(lpTemp6+1)+*(lpTemp6+2);
+			p7=*lpTemp7+*(lpTemp7+1)+*(lpTemp7+2);
+			p8=*lpTemp8+*(lpTemp8+1)+*(lpTemp8+2);
+
+			b=*(lpSrc++);			//读取RGB信息
+			g=*(lpSrc++);
+			r=*(lpSrc++);
+			if (b == 255 && g ==255 && r == 255)  //如果是白点的话
+				continue;
+			else //如果是红点的话
+			{
+				if(((p1+p2+p3+p4+p5+p6+p7+p8)!=255*3*8) && ((p1+p2+p3+p4+p5+p6+p7+p8)!=255*8))//如果周围的八个点不全是红色并且全不是白色的话
+				{
+					edgepoint[edgepointsNO].x = mm;		//把该点的坐标放入数组edgepoints中
+					edgepoint[edgepointsNO].y = nn;
+					edgepointsNO ++;
+				}			
+			}
+
+		}//for
+	}//for
+}
+
+
+void CTestNetDllDlg::EdgeDetection_2user(D2POINT edgepoint1[], D2POINT edgepoint2[],BYTE *pBuffer,const long nWidth,const long nHeight)
+{
+	edgepointsNO = 0; //记录总的像素个数
+	edgepointsNO1 = 0;
+	edgepointsNO2 = 0;
+
+	DWORD WidthBytes = 3* nWidth ;    //图像的一行字节数
+	BYTE *lpSrc,  *lpTemp1,*lpTemp2,*lpTemp3,*lpTemp4,*lpTemp5,*lpTemp6,*lpTemp7,*lpTemp8;
+	BYTE r,g,b;
+	long nn, mm ;
+
+	//==================分成两个区域进行检索，左右2个区域======================================
+	for( nn = 1; nn < nHeight-1; nn=nn+5)
+	{
+		for( mm = 1; mm < nWidth/2-1; mm=mm+5)
+		{			
+			lpSrc=(BYTE *)pBuffer+WidthBytes*nn+mm*3;//WidthBytes
+			lpTemp5=(BYTE *)pBuffer+WidthBytes*(nn-1)+(mm-1)*3;//左上
+			lpTemp1=(BYTE *)pBuffer+WidthBytes*(nn-1)+mm*3;//上
+			lpTemp6=(BYTE *)pBuffer+WidthBytes*(nn-1)+(mm+1)*3;//右上
+			lpTemp7=(BYTE *)pBuffer+WidthBytes*(nn+1)+(mm-1)*3;//左下
+			lpTemp2=(BYTE *)pBuffer+WidthBytes*(nn+1)+mm*3;//下
+			lpTemp8=(BYTE *)pBuffer+WidthBytes*(nn+1)+(mm+1)*3;//右下
+			lpTemp3=(BYTE *)pBuffer+WidthBytes*nn+(mm-1)*3;//左
+			lpTemp4=(BYTE *)pBuffer+WidthBytes*nn+(mm+1)*3;//右
+
+			unsigned long p1,p2,p3,p4,p5,p6,p7,p8;
+			p1=p2=p3=p4=p5=p6=p7=p8=0;
+			p1=*lpTemp1+*(lpTemp1+1)+*(lpTemp1+2);
+			p2=*lpTemp2+*(lpTemp2+1)+*(lpTemp2+2);
+			p3=*lpTemp3+*(lpTemp3+1)+*(lpTemp3+2);
+			p4=*lpTemp4+*(lpTemp4+1)+*(lpTemp4+2);
+			p5=*lpTemp5+*(lpTemp5+1)+*(lpTemp5+2);
+			p6=*lpTemp6+*(lpTemp6+1)+*(lpTemp6+2);
+			p7=*lpTemp7+*(lpTemp7+1)+*(lpTemp7+2);
+			p8=*lpTemp8+*(lpTemp8+1)+*(lpTemp8+2);
+
+			//读取RGB信息
+			b=*(lpSrc++);
+			g=*(lpSrc++);
+			r=*(lpSrc++);
+			if (b == 255 && g ==255 && r == 255)  //如果是白点的话
+				continue;
+			else               //如果是红点的话
+			{
+				//如果周围的八个点不全是红色并且全不是白色的话
+				if(((p1+p2+p3+p4+p5+p6+p7+p8)!=255*3*8) && ((p1+p2+p3+p4+p5+p6+p7+p8)!=255*8))
+				{
+					edgepoint1[edgepointsNO1].x = mm;		//把该点的坐标放入数组edgepoints中
+					edgepoint1[edgepointsNO1].y = nn;
+					edgepointsNO1 ++;
+				}			
+			}
+		}
+	}
+
+
+	//////////////////////////////////////////////////////////////////////////
+	for( nn = 1; nn < nHeight-1; nn=nn+5)
+	{
+		for( mm = nWidth/2; mm < nWidth; mm=mm+5)
+		{			
+			lpSrc=(BYTE *)pBuffer+WidthBytes*nn+mm*3;//WidthBytes
+			lpTemp5=(BYTE *)pBuffer+WidthBytes*(nn-1)+(mm-1)*3;//左上
+			lpTemp1=(BYTE *)pBuffer+WidthBytes*(nn-1)+mm*3;//上
+			lpTemp6=(BYTE *)pBuffer+WidthBytes*(nn-1)+(mm+1)*3;//右上
+			lpTemp7=(BYTE *)pBuffer+WidthBytes*(nn+1)+(mm-1)*3;//左下
+			lpTemp2=(BYTE *)pBuffer+WidthBytes*(nn+1)+mm*3;//下
+			lpTemp8=(BYTE *)pBuffer+WidthBytes*(nn+1)+(mm+1)*3;//右下
+			lpTemp3=(BYTE *)pBuffer+WidthBytes*nn+(mm-1)*3;//左
+			lpTemp4=(BYTE *)pBuffer+WidthBytes*nn+(mm+1)*3;//右
+
+			unsigned long p1,p2,p3,p4,p5,p6,p7,p8;
+			p1=p2=p3=p4=p5=p6=p7=p8=0;
+			p1=*lpTemp1+*(lpTemp1+1)+*(lpTemp1+2);
+			p2=*lpTemp2+*(lpTemp2+1)+*(lpTemp2+2);
+			p3=*lpTemp3+*(lpTemp3+1)+*(lpTemp3+2);
+			p4=*lpTemp4+*(lpTemp4+1)+*(lpTemp4+2);
+			p5=*lpTemp5+*(lpTemp5+1)+*(lpTemp5+2);
+			p6=*lpTemp6+*(lpTemp6+1)+*(lpTemp6+2);
+			p7=*lpTemp7+*(lpTemp7+1)+*(lpTemp7+2);
+			p8=*lpTemp8+*(lpTemp8+1)+*(lpTemp8+2);
+
+			//读取RGB信息
+			b=*(lpSrc++);
+			g=*(lpSrc++);
+			r=*(lpSrc++);
+			if (b == 255 && g ==255 && r == 255)  //如果是白点的话
+				continue;
+			else  //如果是红点的话
+			{
+				//如果周围的八个点不全是红色并且全不是白色的话
+				if(((p1+p2+p3+p4+p5+p6+p7+p8)!=255*3*8) && ((p1+p2+p3+p4+p5+p6+p7+p8)!=255*8))
+				{
+					edgepoint2[edgepointsNO2].x = mm;//把该点的坐标放入数组edgepoints中
+					edgepoint2[edgepointsNO2].y = nn;
+					edgepointsNO2 ++;
+				}			
+			}
+		}//for
+	}//for
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

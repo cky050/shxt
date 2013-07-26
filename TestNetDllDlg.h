@@ -162,9 +162,21 @@ public:
 
 public:
 	BYTE *m_pBGbuffer;
+	
 	void Del_Noise(BYTE *pImageBuffer, const long nWidth, const long nHeight, const int points);
 	void QuanFangXiangFuShi(BYTE *pImageBuffer, const long nWidth, const long nHeight);
 	void QuanFangXiangPengZhang(BYTE *pImageBuffer, const long nWidth, const long nHeight);
-	
+
+	typedef struct
+	{
+		int x;
+		int y;
+	}D2POINT;
+	void EdgeDetection(D2POINT edgepoint[], BYTE *pBuffer,const long nWidth,const long nHeight);
+	void EdgeDetection_2user(D2POINT edgepoint1[], D2POINT edgepoint2[],BYTE *pBuffer,const long nWidth,const long nHeight);
+
 };
 
+static long edgepointsNO;
+static long edgepointsNO1;
+static long edgepointsNO2;
