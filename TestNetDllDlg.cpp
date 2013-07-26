@@ -539,7 +539,7 @@ int     CTestNetDllDlg::OnMediaDataRecv(long nPort,char * pBuf,long nSize,FRAME_
 	{
 		fclose(sp);
 	}
-		
+	
 
 	delete []dBuffer;
 	return 0;
@@ -1082,12 +1082,12 @@ void CTestNetDllDlg::DoDataExchange(CDataExchange* pDX)
 	CDialog::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_ISTCP, m_isTcp);
 	DDX_Control(pDX, IDC_PLAYD1, m_isD1);
-	DDX_Control(pDX, IDC_TREE1, m_ListViewTree);
-	DDX_Control(pDX, IDC_COMBO2, m_pComBox);
-	DDX_Control(pDX, IDC_LOGLIST, m_logList);
+//	DDX_Control(pDX, IDC_TREE1, m_ListViewTree);//////////////////////////////////
+//	DDX_Control(pDX, IDC_COMBO2, m_pComBox);
+//	DDX_Control(pDX, IDC_LOGLIST, m_logList);
 	DDX_Control(pDX, IDC_VIDEORECT, m_VideoRect);
-	DDX_Control(pDX, IDC_PTZLIST, m_ptzTreeList);
-	DDX_Control(pDX, IDC_INCLUDEAUDIO, m_haveAudio);
+//	DDX_Control(pDX, IDC_PTZLIST, m_ptzTreeList);
+//	DDX_Control(pDX, IDC_INCLUDEAUDIO, m_haveAudio);
 	//  DDX_Control(pDX, IDC_AACAUDIO, m_pBGbuffer);
 }
 
@@ -1095,52 +1095,53 @@ BEGIN_MESSAGE_MAP(CTestNetDllDlg, CDialog)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	//}}AFX_MSG_MAP
-	ON_BN_CLICKED(IDC_ADD, &CTestNetDllDlg::OnBnClickedAdd)
+//	ON_BN_CLICKED(IDC_ADD, &CTestNetDllDlg::OnBnClickedAdd)
 	ON_WM_DESTROY() 
 	ON_BN_CLICKED(IDC_PLAY, &CTestNetDllDlg::OnBnClickedPlay)
-	ON_BN_CLICKED(IDC_READCONFIG, &CTestNetDllDlg::OnBnClickedReadconfig)
-	ON_BN_CLICKED(IDC_SAVECONFIG, &CTestNetDllDlg::OnBnClickedSaveconfig)
-	ON_BN_CLICKED(IDC_ADDPRESET, &CTestNetDllDlg::OnBnClickedAddpreset)
-	ON_BN_CLICKED(IDC_DELPRESET, &CTestNetDllDlg::OnBnClickedDelpreset)
-	ON_BN_CLICKED(IDC_CALLPRESET, &CTestNetDllDlg::OnBnClickedCallpreset)
-	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CTestNetDllDlg::OnTvnSelchangedTree1)
-	ON_BN_CLICKED(IDC_SEARCHLOG, &CTestNetDllDlg::OnBnClickedSearchlog)
-	ON_BN_CLICKED(IDC_UPLOADCONFIG, &CTestNetDllDlg::OnBnClickedUploadconfig)
-	ON_BN_CLICKED(IDC_DOWNLOADLOG, &CTestNetDllDlg::OnBnClickedDownloadlog)
-	ON_BN_CLICKED(IDC_STARTWRITELOG, &CTestNetDllDlg::OnBnClickedStartwritelog)
-	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LOGLIST, &CTestNetDllDlg::OnLvnItemchangedLoglist)
-	ON_BN_CLICKED(IDC_REBOOT, &CTestNetDllDlg::OnBnClickedReboot) 
-	ON_BN_CLICKED(IDC_STARTUPLOAD, &CTestNetDllDlg::OnBnClickedStartupload)
-	ON_BN_CLICKED(IDC_STOPUPLOAD, &CTestNetDllDlg::OnBnClickedStopupload)
+//	ON_BN_CLICKED(IDC_READCONFIG, &CTestNetDllDlg::OnBnClickedReadconfig)
+//	ON_BN_CLICKED(IDC_SAVECONFIG, &CTestNetDllDlg::OnBnClickedSaveconfig)
+//	ON_BN_CLICKED(IDC_ADDPRESET, &CTestNetDllDlg::OnBnClickedAddpreset)
+//	ON_BN_CLICKED(IDC_DELPRESET, &CTestNetDllDlg::OnBnClickedDelpreset)
+//	ON_BN_CLICKED(IDC_CALLPRESET, &CTestNetDllDlg::OnBnClickedCallpreset)
+//	ON_NOTIFY(TVN_SELCHANGED, IDC_TREE1, &CTestNetDllDlg::OnTvnSelchangedTree1)
+//	ON_BN_CLICKED(IDC_SEARCHLOG, &CTestNetDllDlg::OnBnClickedSearchlog)
+//	ON_BN_CLICKED(IDC_UPLOADCONFIG, &CTestNetDllDlg::OnBnClickedUploadconfig)
+//	ON_BN_CLICKED(IDC_DOWNLOADLOG, &CTestNetDllDlg::OnBnClickedDownloadlog)
+//	ON_BN_CLICKED(IDC_STARTWRITELOG, &CTestNetDllDlg::OnBnClickedStartwritelog)
+//	ON_NOTIFY(LVN_ITEMCHANGED, IDC_LOGLIST, &CTestNetDllDlg::OnLvnItemchangedLoglist)
+//	ON_BN_CLICKED(IDC_REBOOT, &CTestNetDllDlg::OnBnClickedReboot)
+
+//	ON_BN_CLICKED(IDC_STARTUPLOAD, &CTestNetDllDlg::OnBnClickedStartupload)
+//	ON_BN_CLICKED(IDC_STOPUPLOAD, &CTestNetDllDlg::OnBnClickedStopupload)
 
 	ON_WM_TIMER()
-	ON_BN_CLICKED(IDC_STOPDOWN, &CTestNetDllDlg::OnBnClickedStopdown)
-	ON_BN_CLICKED(IDC_SEARCHAVI, &CTestNetDllDlg::OnBnClickedSearchavi)
-	ON_BN_CLICKED(IDC_CAPIMAGE, &CTestNetDllDlg::OnBnClickedCapimage)
-	ON_BN_CLICKED(IDC_READSN, &CTestNetDllDlg::OnBnClickedReadsn)
-	ON_BN_CLICKED(IDC_DISZOOM, &CTestNetDllDlg::OnBnClickedDiszoom)
-	ON_BN_CLICKED(IDC_ZOOMIN, &CTestNetDllDlg::OnBnClickedZoomin)
-	ON_BN_CLICKED(IDC_ZOOMOUT, &CTestNetDllDlg::OnBnClickedZoomout)
-	ON_BN_CLICKED(IDC_ZOOMMOVE, &CTestNetDllDlg::OnBnClickedZoommove)
-	ON_BN_CLICKED(IDC_FULLFILL, &CTestNetDllDlg::OnBnClickedFullfill)
-	ON_BN_CLICKED(IDC_SEARCHIPC, &CTestNetDllDlg::OnBnClickedSearchipc)
-	ON_NOTIFY(TVN_SELCHANGED, IDC_PTZLIST, &CTestNetDllDlg::OnTvnSelchangedPtzlist)
-	ON_BN_CLICKED(IDC_G711AUDIO, &CTestNetDllDlg::OnBnClickedG711audio)
-	ON_BN_CLICKED(IDC_STOPAUDO, &CTestNetDllDlg::OnBnClickedStopaudo)
-	ON_BN_CLICKED(IDC_AACAUDIO, &CTestNetDllDlg::OnBnClickedAacaudio)
-	ON_BN_CLICKED(IDC_STARTIPCAUDIO, &CTestNetDllDlg::OnBnClickedStartipcaudio)
-	ON_BN_CLICKED(IDC_STOPIPCAUDIO, &CTestNetDllDlg::OnBnClickedStopipcaudio)
-	ON_BN_CLICKED(IDC_DOWNLOADCONFIG, &CTestNetDllDlg::OnBnClickedDownloadconfig)
-	ON_BN_CLICKED(IDC_AUTOVIEWVIDEO, &CTestNetDllDlg::OnBnClickedAutoviewvideo)
-	ON_BN_CLICKED(IDC_PLAYFILE, &CTestNetDllDlg::OnBnClickedPlayfile)
-	ON_BN_CLICKED(IDC_STOPPLAY, &CTestNetDllDlg::OnBnClickedStopplay)
-	ON_NOTIFY(NM_CLICK, IDC_TREE1, &CTestNetDllDlg::OnNMClickTree1)
-	ON_BN_CLICKED(IDC_CONFIGIPC, &CTestNetDllDlg::OnBnClickedConfigipc)
-	ON_BN_CLICKED(IDC_CAPBYFILE, &CTestNetDllDlg::OnBnClickedCapbyfile)
-	ON_BN_CLICKED(IDC_CREATEIFRAME, &CTestNetDllDlg::OnBnClickedCreateiframe)
-	ON_BN_CLICKED(IDC_SAVEUSERDATA, &CTestNetDllDlg::OnBnClickedSaveuserdata)
-	ON_BN_CLICKED(IDC_SETUSERDATA, &CTestNetDllDlg::OnBnClickedSetuserdata)
-	ON_BN_CLICKED(IDC_TEST, &CTestNetDllDlg::OnBnClickedTest)
+//	ON_BN_CLICKED(IDC_STOPDOWN, &CTestNetDllDlg::OnBnClickedStopdown)
+//	ON_BN_CLICKED(IDC_SEARCHAVI, &CTestNetDllDlg::OnBnClickedSearchavi)
+//	ON_BN_CLICKED(IDC_CAPIMAGE, &CTestNetDllDlg::OnBnClickedCapimage)
+//	ON_BN_CLICKED(IDC_READSN, &CTestNetDllDlg::OnBnClickedReadsn)
+//	ON_BN_CLICKED(IDC_DISZOOM, &CTestNetDllDlg::OnBnClickedDiszoom)
+//	ON_BN_CLICKED(IDC_ZOOMIN, &CTestNetDllDlg::OnBnClickedZoomin)
+//	ON_BN_CLICKED(IDC_ZOOMOUT, &CTestNetDllDlg::OnBnClickedZoomout)
+//	ON_BN_CLICKED(IDC_ZOOMMOVE, &CTestNetDllDlg::OnBnClickedZoommove)
+//	ON_BN_CLICKED(IDC_FULLFILL, &CTestNetDllDlg::OnBnClickedFullfill)
+//	ON_BN_CLICKED(IDC_SEARCHIPC, &CTestNetDllDlg::OnBnClickedSearchipc)
+//	ON_NOTIFY(TVN_SELCHANGED, IDC_PTZLIST, &CTestNetDllDlg::OnTvnSelchangedPtzlist)
+//	ON_BN_CLICKED(IDC_G711AUDIO, &CTestNetDllDlg::OnBnClickedG711audio)
+//	ON_BN_CLICKED(IDC_STOPAUDO, &CTestNetDllDlg::OnBnClickedStopaudo)
+//	ON_BN_CLICKED(IDC_AACAUDIO, &CTestNetDllDlg::OnBnClickedAacaudio)
+//	ON_BN_CLICKED(IDC_STARTIPCAUDIO, &CTestNetDllDlg::OnBnClickedStartipcaudio)
+//	ON_BN_CLICKED(IDC_STOPIPCAUDIO, &CTestNetDllDlg::OnBnClickedStopipcaudio)
+//	ON_BN_CLICKED(IDC_DOWNLOADCONFIG, &CTestNetDllDlg::OnBnClickedDownloadconfig)
+//	ON_BN_CLICKED(IDC_AUTOVIEWVIDEO, &CTestNetDllDlg::OnBnClickedAutoviewvideo)
+//	ON_BN_CLICKED(IDC_PLAYFILE, &CTestNetDllDlg::OnBnClickedPlayfile)
+//	ON_BN_CLICKED(IDC_STOPPLAY, &CTestNetDllDlg::OnBnClickedStopplay)
+//	ON_NOTIFY(NM_CLICK, IDC_TREE1, &CTestNetDllDlg::OnNMClickTree1)//////////////////////////////
+//	ON_BN_CLICKED(IDC_CONFIGIPC, &CTestNetDllDlg::OnBnClickedConfigipc)
+//	ON_BN_CLICKED(IDC_CAPBYFILE, &CTestNetDllDlg::OnBnClickedCapbyfile)
+//	ON_BN_CLICKED(IDC_CREATEIFRAME, &CTestNetDllDlg::OnBnClickedCreateiframe)
+//	ON_BN_CLICKED(IDC_SAVEUSERDATA, &CTestNetDllDlg::OnBnClickedSaveuserdata)
+//	ON_BN_CLICKED(IDC_SETUSERDATA, &CTestNetDllDlg::OnBnClickedSetuserdata)
+//	ON_BN_CLICKED(IDC_TEST, &CTestNetDllDlg::OnBnClickedTest)
 //	ON_BN_CLICKED(IDC_BUTTONTEST1, &CTestNetDllDlg::OnClickedButtonTest1)
 //	ON_BN_CLICKED(IDC_BUTTONTEST2, &CTestNetDllDlg::OnClickedButtontest2)
 END_MESSAGE_MAP()
@@ -1232,25 +1233,25 @@ LONG CALLBACK OnStateEvent(LONG lUser,LONG nStateCode,char *pResponse,void *pUse
 			parent->SetDlgItemText(IDC_LASTALARMTEXT,itemmsg);
 		}
 		break;
-	case EVENT_PTZPRESETINFO:
-		{// pResponse=3^1^2^6^ //表示3个预置点，分别为1，2，6
-			CPTZClass * pItem=parent->ptzList[lUser];
-			_bstr_t msg(pResponse);
-			if(pItem!=NULL && pItem->m_strLastPtzInfo!=msg)
-			{
-				pItem->m_strLastPtzInfo=msg;
-				while(parent->m_pComBox.GetCount()>0)
-				{
-					parent->m_pComBox.DeleteString(0);
-				}
-				CStringArray retls;
-				int count=TiXmlElement::Split(msg,"^",1,retls);
-				for(int idx=1;idx<count;idx++)
-				{
-					parent->m_pComBox.InsertString(0,retls[idx]);
-				}
-			}
-		}
+	case EVENT_PTZPRESETINFO://预制点信息 
+	//  	{// pResponse=3^1^2^6^ //表示3个预置点，分别为1，2，6
+	//		CPTZClass * pItem=parent->ptzList[lUser];
+	//		_bstr_t msg(pResponse);
+	//		if(pItem!=NULL && pItem->m_strLastPtzInfo!=msg)
+	//		{
+	//			pItem->m_strLastPtzInfo=msg;
+	//			while(parent->m_pComBox.GetCount()>0)
+	//			{
+	//				parent->m_pComBox.DeleteString(0);
+	//			}
+	//			CStringArray retls;
+	//			int count=TiXmlElement::Split(msg,"^",1,retls);
+	//			for(int idx=1;idx<count;idx++)
+	//			{
+	//				parent->m_pComBox.InsertString(0,retls[idx]);
+	//			}
+	//		}
+	//	}
 		break;
 	case EVENT_SENDPTZOK:
 		{			
@@ -1350,8 +1351,8 @@ BOOL CTestNetDllDlg::OnInitDialog()
 	IP_NET_DVR_SetReplayDataCallBack(::OnPlayBackDataRecv,this);//设置回放数据回调
 	IP_NET_DVR_SetPlayActionEventCallBack(::OnPlayActionEvent,this);//设置控制状态回调
 
-	m_logList.InsertColumn(0,_T("日志文件"),0,160);
-	m_logList.InsertColumn(1,_T("大小"),0,60);
+	//m_logList.InsertColumn(0,_T("日志文件"),0,160);
+	//m_logList.InsertColumn(1,_T("大小"),0,60);
 	SetDlgItemText(IDC_UPFILENAME,_T("c:\\164升级文件.bin"));
 
 	SetTimer(100,100,NULL);
@@ -1398,42 +1399,42 @@ HCURSOR CTestNetDllDlg::OnQueryDragIcon()
 }
 
 
-void CTestNetDllDlg::OnBnClickedAdd()
-{
-	CString temp;
-	GetDlgItemText(IDC_PTZIP,temp);
-	_bstr_t ip=temp;
-	GetDlgItemText(IDC_PTZUSER,temp);
-	_bstr_t user=temp;
-	GetDlgItemText(IDC_PTZPASS,temp);
-	_bstr_t pass=temp;
-	int port=GetDlgItemInt(IDC_PTZPORT);
-	LONG retValue;
-	m_nLastCmdId=IP_NET_DVR_Login(ip,port,user,pass,NULL);
-	if(m_nLastCmdId==0)
-	{
-		MessageBox(_T("增加登陆失败!"));
-		return ;
-	}else
-	{
-
-	}
-	CPTZClass * pItem=new CPTZClass();	
-	ptzList[m_nLastCmdId]=pItem;
-	pItem->m_nUserId=m_nLastCmdId;
-	_bstr_t itemname=ip;
-	if(m_ptzTreeList.GetRootItem()!=NULL)
-	{
-		HTREEITEM itemid=m_ptzTreeList.InsertItem(itemname,NULL);
-		m_ptzTreeList.SetItemData(itemid,m_nLastCmdId);
-	}
-	else
-	{
-		//HTREEITEM hItem=m_ListViewTree.GetRootItem();
-		HTREEITEM itemid=m_ptzTreeList.InsertItem(itemname,NULL);
-		m_ptzTreeList.SetItemData(itemid,m_nLastCmdId);
-	}
-}
+//void CTestNetDllDlg::OnBnClickedAdd()
+//{
+//	CString temp;
+//	GetDlgItemText(IDC_PTZIP,temp);
+//	_bstr_t ip=temp;
+//	GetDlgItemText(IDC_PTZUSER,temp);
+//	_bstr_t user=temp;
+//	GetDlgItemText(IDC_PTZPASS,temp);
+//	_bstr_t pass=temp;
+//	int port=GetDlgItemInt(IDC_PTZPORT);
+//	LONG retValue;
+//	m_nLastCmdId=IP_NET_DVR_Login(ip,port,user,pass,NULL);
+//	if(m_nLastCmdId==0)
+//	{
+//		MessageBox(_T("增加登陆失败!"));
+//		return ;
+//	}else
+//	{
+//
+//	}
+//	CPTZClass * pItem=new CPTZClass();	
+//	ptzList[m_nLastCmdId]=pItem;
+//	pItem->m_nUserId=m_nLastCmdId;
+//	_bstr_t itemname=ip;
+//	if(m_ptzTreeList.GetRootItem()!=NULL)
+//	{
+//		HTREEITEM itemid=m_ptzTreeList.InsertItem(itemname,NULL);
+//		m_ptzTreeList.SetItemData(itemid,m_nLastCmdId);
+//	}
+//	else
+//	{
+//		//HTREEITEM hItem=m_ListViewTree.GetRootItem();
+//		HTREEITEM itemid=m_ptzTreeList.InsertItem(itemname,NULL);
+//		m_ptzTreeList.SetItemData(itemid,m_nLastCmdId);
+//	}
+//}
 
 
 
@@ -1512,34 +1513,34 @@ LONG CALLBACK  OnMediaRecv(LONG lRealHandle,DWORD dwDataType,BYTE *pBuffer,DWORD
 
 
 
-void CTestNetDllDlg::OnBnClickedStopplay()
-{
-	if(m_lRealHandle==0)
-	{
-		MessageBox(_T("请选择要停止的视频"));
-		return;
-	}
-	IP_NET_DVR_StopRealPlay(m_lRealHandle);
-	CPlayerClass * pItem=playlist[m_lRealHandle];
-	playlist.erase(m_lRealHandle);
-	if(pItem)
-	{
-		HTREEITEM hItem=m_ListViewTree.GetRootItem();
-		while(hItem)
-		{
-			LONG tagData=(LONG)m_ListViewTree.GetItemData(hItem);
-			if(tagData==m_lRealHandle)
-			{
-				m_ListViewTree.DeleteItem(hItem);
-				break;
-			}
-			hItem=m_ListViewTree.GetNextSiblingItem(hItem);
-		}
-		IP_TPS_DeleteStream(pItem->m_nPlayPort);
-		delete pItem;
-	}
-	m_lRealHandle=0;
-}
+//void CTestNetDllDlg::OnBnClickedStopplay()
+//{
+//	if(m_lRealHandle==0)
+//	{
+//		MessageBox(_T("请选择要停止的视频"));
+//		return;
+//	}
+//	IP_NET_DVR_StopRealPlay(m_lRealHandle);
+//	CPlayerClass * pItem=playlist[m_lRealHandle];
+//	playlist.erase(m_lRealHandle);
+//	if(pItem)
+//	{
+//		HTREEITEM hItem=m_ListViewTree.GetRootItem();
+//		while(hItem)
+//		{
+//			LONG tagData=(LONG)m_ListViewTree.GetItemData(hItem);
+//			if(tagData==m_lRealHandle)
+//			{
+//				m_ListViewTree.DeleteItem(hItem);
+//				break;
+//			}
+//			hItem=m_ListViewTree.GetNextSiblingItem(hItem);
+//		}
+//		IP_TPS_DeleteStream(pItem->m_nPlayPort);
+//		delete pItem;
+//	}
+//	m_lRealHandle=0;
+//}
 
 
 
@@ -1603,20 +1604,20 @@ void CTestNetDllDlg::OnBnClickedPlay()
 
 
 
-		_bstr_t itemname;
-		itemname="";
-		itemname=itemname+"视频"+ip;
-		if(m_ListViewTree.GetRootItem()!=NULL)
-		{
-			HTREEITEM itemid=m_ListViewTree.InsertItem(itemname,NULL);
-			m_ListViewTree.SetItemData(itemid,retValue);
-		}
-		else
-		{
-			//HTREEITEM hItem=m_ListViewTree.GetRootItem();
-			HTREEITEM itemid=m_ListViewTree.InsertItem(itemname,NULL);
-			m_ListViewTree.SetItemData(itemid,retValue);
-		}
+		//_bstr_t itemname;
+		//itemname="";
+		//itemname=itemname+"视频"+ip;
+		//if(m_ListViewTree.GetRootItem()!=NULL)
+		//{
+		//	HTREEITEM itemid=m_ListViewTree.InsertItem(itemname,NULL);
+		//	m_ListViewTree.SetItemData(itemid,retValue);
+		//}
+		//else
+		//{
+		//	//HTREEITEM hItem=m_ListViewTree.GetRootItem();
+		//	HTREEITEM itemid=m_ListViewTree.InsertItem(itemname,NULL);
+		//	m_ListViewTree.SetItemData(itemid,retValue);
+		//}
 		
 	}
 
@@ -1673,29 +1674,29 @@ LONG CALLBACK OnAUXResponse(LONG lUser,LONG nType,char *pResponse,void *pUser)
 		}
 		break;
 		case CMD_GET_LOGFILE_LIST:
-		{//日志返回信息
-			_bstr_t logfilelist(pResponse);
-			TiXmlDocument doc;
-			doc.Parse(pResponse);
-			if(!doc.Error())
-			{
-				int logfilecount=0;
-				TiXmlElement * pItem=doc.RootElement()->FirstChildElement();
-				parent->m_logList.DeleteAllItems();
-				int idx=0;
-				while(pItem)
-				{
-					const char * filename=pItem->Attribute("FilePath");
-					int itemId=parent->m_logList.InsertItem(idx++,_bstr_t(filename));
-					const char * filesize=pItem->Attribute("FileLength");
-					parent->m_logList.SetItemText(itemId,1,_bstr_t(filesize)); 
-					pItem=pItem->NextSiblingElement();
-				}
-			}
-		}
+		//{//日志返回信息
+		//	_bstr_t logfilelist(pResponse);
+		//	TiXmlDocument doc;
+		//	doc.Parse(pResponse);
+		//	if(!doc.Error())
+		//	{
+		//		int logfilecount=0;
+		//		TiXmlElement * pItem=doc.RootElement()->FirstChildElement();
+		//		parent->m_logList.DeleteAllItems();
+		//		int idx=0;
+		//		while(pItem)
+		//		{
+		//			const char * filename=pItem->Attribute("FilePath");
+		//			int itemId=parent->m_logList.InsertItem(idx++,_bstr_t(filename));
+		//			const char * filesize=pItem->Attribute("FileLength");
+		//			parent->m_logList.SetItemText(itemId,1,_bstr_t(filesize)); 
+		//			pItem=pItem->NextSiblingElement();
+		//		}
+		//	}
+		//}
 		break;
 		case CMD_GET_RECORD_FILE_LIST:
-			{
+			/*{////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				_bstr_t logfilelist(pResponse);
 				TiXmlDocument doc;
 				doc.Parse(pResponse);
@@ -1714,7 +1715,7 @@ LONG CALLBACK OnAUXResponse(LONG lUser,LONG nType,char *pResponse,void *pUser)
 						pItem=pItem->NextSiblingElement();
 					}
 				}
-			}
+			}*/
 			break;
 		case CMD_GET_SYSTEMCONTROLSTRING:
 		{//获取能力集
@@ -1762,32 +1763,32 @@ LONG CALLBACK OnAUXResponse(LONG lUser,LONG nType,char *pResponse,void *pUser)
 
 
 
-void CTestNetDllDlg::OnBnClickedReadconfig()
-{//读取配置	
-	CheckCmdIdOk();
-	IP_NET_DVR_GetDVRConfig(m_nLastCmdId,CMD_GET_MEDIA_VIDEO_CONFIG,0,"",0,0); 
-}
+//void CTestNetDllDlg::OnBnClickedReadconfig()
+//{//读取配置	
+//	CheckCmdIdOk();
+//	IP_NET_DVR_GetDVRConfig(m_nLastCmdId,CMD_GET_MEDIA_VIDEO_CONFIG,0,"",0,0); 
+//}
 
 
-void CTestNetDllDlg::OnBnClickedSaveconfig()
-{//保存配置
-	
-	CheckCmdIdOk();
-	_bstr_t xml;
-	CString b;
-	CString cb;
-	CString cr;
-	CString h;
-	GetDlgItemText(IDC_B,b);
-	GetDlgItemText(IDC_CB,cb);
-	GetDlgItemText(IDC_CR,cr);
-	GetDlgItemText(IDC_H,h);
-	xml="";
-	xml=xml+"<Capture VideoFormat=\"PAL\"   Brightness=\""+b.GetBuffer(0)+"\"   SaturationCb=\""+cb.GetBuffer(0)\
-		+"\"  SaturationCr=\""+cr.GetBuffer(0)+"\"  Contrast=\""+h.GetBuffer(0)+"\"  />";
-	const char * pXml=(const char *)xml;
-	IP_NET_DVR_SetDVRConfig(m_nLastCmdId,CMD_SET_MEDIA_VIDEO_CAPTURE,0,(LPVOID)pXml,strlen(pXml)); 
-}
+//void CTestNetDllDlg::OnBnClickedSaveconfig()
+//{//保存配置
+//	
+//	CheckCmdIdOk();
+//	_bstr_t xml;
+//	CString b;
+//	CString cb;
+//	CString cr;
+//	CString h;
+//	GetDlgItemText(IDC_B,b);
+//	GetDlgItemText(IDC_CB,cb);
+//	GetDlgItemText(IDC_CR,cr);
+//	GetDlgItemText(IDC_H,h);
+//	xml="";
+//	xml=xml+"<Capture VideoFormat=\"PAL\"   Brightness=\""+b.GetBuffer(0)+"\"   SaturationCb=\""+cb.GetBuffer(0)\
+//		+"\"  SaturationCr=\""+cr.GetBuffer(0)+"\"  Contrast=\""+h.GetBuffer(0)+"\"  />";
+//	const char * pXml=(const char *)xml;
+//	IP_NET_DVR_SetDVRConfig(m_nLastCmdId,CMD_SET_MEDIA_VIDEO_CAPTURE,0,(LPVOID)pXml,strlen(pXml)); 
+//}
 
 
 
@@ -1841,6 +1842,7 @@ BOOL CTestNetDllDlg::PreTranslateMessage(MSG* pMsg)
 		}
 	} 
 
+	/*
 	if(pMsg->message==WM_LBUTTONDOWN)
 	{
 		map<LONG,CPTZClass*>::iterator item;
@@ -1879,132 +1881,134 @@ BOOL CTestNetDllDlg::PreTranslateMessage(MSG* pMsg)
 			}
 		}
 	}
+	*/
+
 	return CDialog::PreTranslateMessage(pMsg);
 }
 
 
 
-void CTestNetDllDlg::OnBnClickedAddpreset()
-{//增加预置点 IDC_PRESET	
-	map<LONG,CPTZClass*>::iterator item;
-	item=ptzList.begin();
-	if(m_nLastCmdId!=0)//item!=ptzList.end())
-	{
-		//CPTZClass * pItem=item->second;
-		int preset=GetDlgItemInt(IDC_PRESET);
-		IP_NET_DVR_PTZPreset(m_nLastCmdId,SET_PRESET,preset);
-	}
-}
+//void CTestNetDllDlg::OnBnClickedAddpreset()
+//{//增加预置点 IDC_PRESET	
+//	map<LONG,CPTZClass*>::iterator item;
+//	item=ptzList.begin();
+//	if(m_nLastCmdId!=0)//item!=ptzList.end())
+//	{
+//		//CPTZClass * pItem=item->second;
+//		int preset=GetDlgItemInt(IDC_PRESET);
+//		IP_NET_DVR_PTZPreset(m_nLastCmdId,SET_PRESET,preset);
+//	}
+//}
 
 
-void CTestNetDllDlg::OnBnClickedDelpreset()
-{
-	map<LONG,CPTZClass*>::iterator item;
-	item=ptzList.begin();
-	if(m_nLastCmdId!=0)//item!=ptzList.end())
-	{
-		//CPTZClass * pItem=item->second;
-		int preset=GetDlgItemInt(IDC_PRESET);
-		IP_NET_DVR_PTZPreset(m_nLastCmdId,CLE_PRESET,preset);
-	}
-}
-
-
-
-void CTestNetDllDlg::OnBnClickedCallpreset()
-{
-	map<LONG,CPTZClass*>::iterator item;
-	item=ptzList.begin();
-	if(m_nLastCmdId!=0)//item!=ptzList.end())
-	{
-		//CPTZClass * pItem=item->second;
-		int preset=GetDlgItemInt(IDC_PRESET);
-		IP_NET_DVR_PTZPreset(m_nLastCmdId,GOTO_PRESET,preset);
-	}
-}
-
-
-void CTestNetDllDlg::OnTvnSelchangedTree1(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-	HTREEITEM hItem=m_ListViewTree.GetSelectedItem();
-	m_SwitchFromlRealHandle=m_lRealHandle;
-	m_lRealHandle=(LONG)m_ListViewTree.GetItemData(hItem);
-	if(m_lRealHandle)
-	{
-		//IP_TPS_SetVideoOn(oldplayid,0);
-		//IP_TPS_SetVideoOn(m_lRealHandle,1);
-		CPlayerClass * player1=playlist[m_SwitchFromlRealHandle];
-		CPlayerClass * player2=playlist[m_lRealHandle];
-		if(player1!=NULL && player2!=NULL)
-		{
-			//IP_TPS_SwitchVideo(player1->m_nPlayPort,player2->m_nPlayPort);
-		}
-		if(player1)
-		{
-			IP_TPS_SetVideoOn(player1->m_nPlayPort,0);
-		}
-		if(player2)
-		{
-			IP_TPS_SetVideoOn(player2->m_nPlayPort,1);
-		}
-	}
-	*pResult = 0;
-}
-
-void CTestNetDllDlg::OnBnClickedSearchlog()
-{
-	map<LONG,CPTZClass*>::iterator item;
-	item=ptzList.begin();
-	if(m_nLastCmdId!=0)//item!=ptzList.end())
-	{
-		CPTZClass * pItem=item->second;
-		IP_NET_DVR_FindDVRLogFile(m_nLastCmdId);
-	}
-}
-
-
-void CTestNetDllDlg::OnBnClickedUploadconfig()
-{
-	if(m_nLastCmdId!=0)
-	{
-		IP_NET_DVR_SetConfigFile(m_nLastCmdId,"c:\\20110728151435_config.xml");
-	}
-}
-
-
-void CTestNetDllDlg::OnBnClickedDownloadlog()
-{	
-	CheckCmdIdOk();
-	CString logfile;
-	GetDlgItemText(IDC_SELECTFILE,logfile);
-	_bstr_t logfilenamt(logfile);
-	IP_NET_DVR_GetFileByName(m_nLastCmdId,LOG_FILE,(char *)logfilenamt,"c:\\");
-	 	
-}
-
-void CTestNetDllDlg::OnBnClickedStartwritelog()
-{
-	//3表示写文件，同时要用软件也能看到
-	IP_NET_DVR_SetLogToFile(3,"c:\\",0);
-}
-
-void CTestNetDllDlg::OnLvnItemchangedLoglist(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);	
-	CString logfile=m_logList.GetItemText(pNMLV->iItem,0);
-	SetDlgItemText(IDC_SELECTFILE,logfile);
-	*pResult = 0;
-}
+//void CTestNetDllDlg::OnBnClickedDelpreset()
+//{
+//	map<LONG,CPTZClass*>::iterator item;
+//	item=ptzList.begin();
+//	if(m_nLastCmdId!=0)//item!=ptzList.end())
+//	{
+//		//CPTZClass * pItem=item->second;
+//		int preset=GetDlgItemInt(IDC_PRESET);
+//		IP_NET_DVR_PTZPreset(m_nLastCmdId,CLE_PRESET,preset);
+//	}
+//}
 
 
 
+//void CTestNetDllDlg::OnBnClickedCallpreset()
+//{
+//	map<LONG,CPTZClass*>::iterator item;
+//	item=ptzList.begin();
+//	if(m_nLastCmdId!=0)//item!=ptzList.end())
+//	{
+//		//CPTZClass * pItem=item->second;
+//		int preset=GetDlgItemInt(IDC_PRESET);
+//		IP_NET_DVR_PTZPreset(m_nLastCmdId,GOTO_PRESET,preset);
+//	}
+//}
 
-void CTestNetDllDlg::OnBnClickedReboot()
-{	
-	CheckCmdIdOk();//m_nLastCmdId
-	IP_NET_DVR_RebootDVR(m_nLastCmdId); 
-}
+
+//void CTestNetDllDlg::OnTvnSelchangedTree1(NMHDR *pNMHDR, LRESULT *pResult)
+//{
+//	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+//	HTREEITEM hItem=m_ListViewTree.GetSelectedItem();
+//	m_SwitchFromlRealHandle=m_lRealHandle;
+//	m_lRealHandle=(LONG)m_ListViewTree.GetItemData(hItem);
+//	if(m_lRealHandle)
+//	{
+//		//IP_TPS_SetVideoOn(oldplayid,0);
+//		//IP_TPS_SetVideoOn(m_lRealHandle,1);
+//		CPlayerClass * player1=playlist[m_SwitchFromlRealHandle];
+//		CPlayerClass * player2=playlist[m_lRealHandle];
+//		if(player1!=NULL && player2!=NULL)
+//		{
+//			//IP_TPS_SwitchVideo(player1->m_nPlayPort,player2->m_nPlayPort);
+//		}
+//		if(player1)
+//		{
+//			IP_TPS_SetVideoOn(player1->m_nPlayPort,0);
+//		}
+//		if(player2)
+//		{
+//			IP_TPS_SetVideoOn(player2->m_nPlayPort,1);
+//		}
+//	}
+//	*pResult = 0;
+//}
+
+//void CTestNetDllDlg::OnBnClickedSearchlog()
+//{
+//	map<LONG,CPTZClass*>::iterator item;
+//	item=ptzList.begin();
+//	if(m_nLastCmdId!=0)//item!=ptzList.end())
+//	{
+//		CPTZClass * pItem=item->second;
+//		IP_NET_DVR_FindDVRLogFile(m_nLastCmdId);
+//	}
+//}
+
+
+//void CTestNetDllDlg::OnBnClickedUploadconfig()
+//{
+//	if(m_nLastCmdId!=0)
+//	{
+//		IP_NET_DVR_SetConfigFile(m_nLastCmdId,"c:\\20110728151435_config.xml");
+//	}
+//}
+
+
+//void CTestNetDllDlg::OnBnClickedDownloadlog()
+//{	
+//	CheckCmdIdOk();
+//	CString logfile;
+//	GetDlgItemText(IDC_SELECTFILE,logfile);
+//	_bstr_t logfilenamt(logfile);
+//	IP_NET_DVR_GetFileByName(m_nLastCmdId,LOG_FILE,(char *)logfilenamt,"c:\\");
+//	 	
+//}
+
+//void CTestNetDllDlg::OnBnClickedStartwritelog()
+//{
+//	//3表示写文件，同时要用软件也能看到
+//	IP_NET_DVR_SetLogToFile(3,"c:\\",0);
+//}
+
+//void CTestNetDllDlg::OnLvnItemchangedLoglist(NMHDR *pNMHDR, LRESULT *pResult)
+//{
+//	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);	
+//	CString logfile=m_logList.GetItemText(pNMLV->iItem,0);
+//	SetDlgItemText(IDC_SELECTFILE,logfile);
+//	*pResult = 0;
+//}
+
+
+
+
+//void CTestNetDllDlg::OnBnClickedReboot()
+//{	
+//	CheckCmdIdOk();//m_nLastCmdId
+//	IP_NET_DVR_RebootDVR(m_nLastCmdId); 
+//}
 
 
 
@@ -2023,22 +2027,22 @@ int CTestNetDllDlg::CheckCmdIdOk()
 	return m_nLastCmdId;
 }
 
-void CTestNetDllDlg::OnBnClickedStartupload()
-{
-	CheckCmdIdOk();
-	CString filename;
-	GetDlgItemText(IDC_UPFILENAME,filename);
-	int retValue=IP_NET_DVR_Upgrade(m_nLastCmdId,(char *)_bstr_t(filename)); 
-}
+//void CTestNetDllDlg::OnBnClickedStartupload()
+//{
+//	CheckCmdIdOk();
+//	CString filename;
+//	GetDlgItemText(IDC_UPFILENAME,filename);
+//	int retValue=IP_NET_DVR_Upgrade(m_nLastCmdId,(char *)_bstr_t(filename)); 
+//}
 
 
-void CTestNetDllDlg::OnBnClickedStopupload()
-{
-	CheckCmdIdOk();
-	CString filename;
-	GetDlgItemText(IDC_UPFILENAME,filename);
-	IP_NET_DVR_CloseUpgradeHandle(m_nLastCmdId);		 
-}
+//void CTestNetDllDlg::OnBnClickedStopupload()
+//{
+//	CheckCmdIdOk();
+//	CString filename;
+//	GetDlgItemText(IDC_UPFILENAME,filename);
+//	IP_NET_DVR_CloseUpgradeHandle(m_nLastCmdId);		 
+//}
 
 
 
@@ -2069,408 +2073,409 @@ void CTestNetDllDlg::OnTimer(UINT_PTR nIDEvent)
 				SetDlgItemText(IDC_LASTALARMTEXT,_bstr_t(showmsg));
 			}
 		}
-	}else if(nIDEvent==200)
-	{//自动轮询
-
-
-		/*
-		OnBnClickedStopplay();
-		OnBnClickedPlay();
-		return ;
-		*/
-
-		/*
-		if(m_nAutoViewId==1)
-		{
-			m_VideoRect.SetWindowPos(NULL,0,0,400,300,0);
-		}else
-		{
-			m_VideoRect.SetWindowPos(NULL,0,0,600,400,0);
-		}
-		*/
-		int count=m_ListViewTree.GetCount();
-		if(count>1)
-		{
-			if(m_nAutoViewId>=count)
-			{
-				m_nAutoViewId=0;
-			}
-			int idx=0;
-			HTREEITEM hItem=m_ListViewTree.GetRootItem();
-			while(idx<m_nAutoViewId)
-			{
-				hItem=m_ListViewTree.GetNextSiblingItem(hItem);
-				if(hItem==NULL)
-				{
-					break;
-				}
-				idx++;
-			}
-			if(hItem)
-			{
-				m_nAutoViewId++;
-				m_SwitchFromlRealHandle=m_lRealHandle;
-				m_lRealHandle=m_ListViewTree.GetItemData(hItem);
-
-				CPlayerClass * player1=playlist[m_SwitchFromlRealHandle];
-				CPlayerClass * player2=playlist[m_lRealHandle];
-				if(player1!=NULL && player2!=NULL)
-				{
-					//IP_TPS_SwitchVideo(player1->m_nPlayPort,player2->m_nPlayPort);
-				} 
-				if(player1)
-				{
-					IP_TPS_SetVideoOn(player1->m_nPlayPort,0);
-				}
-				if(player2)
-				{
-					IP_TPS_SetVideoOn(player2->m_nPlayPort,1);
-				} 
-			}
-		}
 	}
+	//else if(nIDEvent==200)
+	//{//自动轮询
+
+
+	//	/*
+	//	OnBnClickedStopplay();
+	//	OnBnClickedPlay();
+	//	return ;
+	//	*/
+
+	//	/*
+	//	if(m_nAutoViewId==1)
+	//	{
+	//		m_VideoRect.SetWindowPos(NULL,0,0,400,300,0);
+	//	}else
+	//	{
+	//		m_VideoRect.SetWindowPos(NULL,0,0,600,400,0);
+	//	}
+	//	*/
+	//	int count=m_ListViewTree.GetCount();
+	//	if(count>1)
+	//	{
+	//		if(m_nAutoViewId>=count)
+	//		{
+	//			m_nAutoViewId=0;
+	//		}
+	//		int idx=0;
+	//		HTREEITEM hItem=m_ListViewTree.GetRootItem();
+	//		while(idx<m_nAutoViewId)
+	//		{
+	//			hItem=m_ListViewTree.GetNextSiblingItem(hItem);
+	//			if(hItem==NULL)
+	//			{
+	//				break;
+	//			}
+	//			idx++;
+	//		}
+	//		if(hItem)
+	//		{
+	//			m_nAutoViewId++;
+	//			m_SwitchFromlRealHandle=m_lRealHandle;
+	//			m_lRealHandle=m_ListViewTree.GetItemData(hItem);
+
+	//			CPlayerClass * player1=playlist[m_SwitchFromlRealHandle];
+	//			CPlayerClass * player2=playlist[m_lRealHandle];
+	//			if(player1!=NULL && player2!=NULL)
+	//			{
+	//				//IP_TPS_SwitchVideo(player1->m_nPlayPort,player2->m_nPlayPort);
+	//			} 
+	//			if(player1)
+	//			{
+	//				IP_TPS_SetVideoOn(player1->m_nPlayPort,0);
+	//			}
+	//			if(player2)
+	//			{
+	//				IP_TPS_SetVideoOn(player2->m_nPlayPort,1);
+	//			} 
+	//		}
+	//	}
+	//}
 }
 
-void CTestNetDllDlg::OnBnClickedStopdown()
-{	
-	CheckCmdIdOk();
-	if(IP_NET_DVR_GetDownloadState(m_nLastCmdId)==0)
-	{
-		LONG ret=IP_NET_DVR_StopGetFile(m_nLastCmdId);		
-		if(ret!=0)
-		{
-			MessageBox(_T("停止上传失败"),_T("停止上传失败"));
-		}
-	} 
-}
+//void CTestNetDllDlg::OnBnClickedStopdown()
+//{	
+//	CheckCmdIdOk();
+//	if(IP_NET_DVR_GetDownloadState(m_nLastCmdId)==0)
+//	{
+//		LONG ret=IP_NET_DVR_StopGetFile(m_nLastCmdId);		
+//		if(ret!=0)
+//		{
+//			MessageBox(_T("停止上传失败"),_T("停止上传失败"));
+//		}
+//	} 
+//}
 
 
-void CTestNetDllDlg::OnBnClickedSearchavi()
-{	
-	CheckCmdIdOk();
-	char searchxml[500];	 
-	char datestr[50]; 
-	char datestr2[50];
-	SYSTEMTIME time;
-	::GetSystemTime(&time);
-	CTime timeItem=time;
-	sprintf(datestr,"%04d%02d%02d",timeItem.GetYear(),timeItem.GetMonth()-1,1);
-	sprintf(datestr2,"%04d%02d%02d",timeItem.GetYear(),timeItem.GetMonth(),timeItem.GetDay()+1);
-	//搜索今天的音视频录像文件的第一页
-
-	_bstr_t mediatype;
-	if(m_haveAudio.GetCheck())
-	{
-		mediatype="AUDIOVIDEO";
-	}else
-	{
-		mediatype="VIDEO";
-	}
-
-	sprintf(searchxml,"<REQUEST_PARAM\nRecordMode=\"ALL\"StartTime=\"%s 00:00:00\"\nEndTime=\"%s 23:59:59\"\nMediaType=\"%s\"\nStreamIndex=\"-1\"\nMinSize=\"-1\"\nMaxSize=\"-1\"\nPage=\"0\"\n/>"
-		,datestr,datestr2,(char *)mediatype);
-	LONG ret;
-	TRACE1("%s",searchxml);
-	ret=IP_NET_DVR_SystemControl(m_nLastCmdId,(long)CMD_GET_RECORD_FILE_LIST,0,(char *)searchxml);
-	if(ret!=0)
-	{
-		MessageBox(_T("查询失败"),_T("查询失败"));
-	} 
-}
+//void CTestNetDllDlg::OnBnClickedSearchavi()
+//{	
+//	CheckCmdIdOk();
+//	char searchxml[500];	 
+//	char datestr[50]; 
+//	char datestr2[50];
+//	SYSTEMTIME time;
+//	::GetSystemTime(&time);
+//	CTime timeItem=time;
+//	sprintf(datestr,"%04d%02d%02d",timeItem.GetYear(),timeItem.GetMonth()-1,1);
+//	sprintf(datestr2,"%04d%02d%02d",timeItem.GetYear(),timeItem.GetMonth(),timeItem.GetDay()+1);
+//	//搜索今天的音视频录像文件的第一页
+//
+//	_bstr_t mediatype;
+//	if(m_haveAudio.GetCheck())
+//	{
+//		mediatype="AUDIOVIDEO";
+//	}else
+//	{
+//		mediatype="VIDEO";
+//	}
+//
+//	sprintf(searchxml,"<REQUEST_PARAM\nRecordMode=\"ALL\"StartTime=\"%s 00:00:00\"\nEndTime=\"%s 23:59:59\"\nMediaType=\"%s\"\nStreamIndex=\"-1\"\nMinSize=\"-1\"\nMaxSize=\"-1\"\nPage=\"0\"\n/>"
+//		,datestr,datestr2,(char *)mediatype);
+//	LONG ret;
+//	TRACE1("%s",searchxml);
+//	ret=IP_NET_DVR_SystemControl(m_nLastCmdId,(long)CMD_GET_RECORD_FILE_LIST,0,(char *)searchxml);
+//	if(ret!=0)
+//	{
+//		MessageBox(_T("查询失败"),_T("查询失败"));
+//	} 
+//}
 
 
 
 //抓图
-void CTestNetDllDlg::OnBnClickedCapimage()
-{
-	if(playlist.size()<=0)
-	{
-		return ;
-	}
-
-	CPlayerClass * player= playlist[m_lRealHandle];
-	if(player!=NULL)
-	{
-		int RetValue=IP_TPS_CatchPic(player->m_nPlayPort,"c:\\");
-		if(RetValue)
-		{
-			MessageBox(_T("抓图失败"),_T("抓图失败"));
-		}
-	}else
-	{
-		playlist.erase(m_lRealHandle);
-	}
-}
-
-
-
-void CTestNetDllDlg::OnBnClickedReadsn()
-{	
-	CheckCmdIdOk();
-	LONG ret=IP_NET_DVR_SystemControl(m_nLastCmdId,(long)CMD_GET_SERIALNUMBER,0,"");
-	if(ret<0)
-	{
-		MessageBox(_T("读取SN失败"),_T("读取失败"));
-	}
-}
-
-void CTestNetDllDlg::OnBnClickedDiszoom()
-{
-	if(playlist.size()<=0)
-	{
-		return ;
-	}
-
-	CPlayerClass * player= playlist[m_lRealHandle];
-	if(player!=NULL)
-	{
-		int RetValue=IP_TPS_SetZoomRectOn(player->m_nPlayPort,0);
-	}else
-	{
-		playlist.erase(m_lRealHandle);
-	}
-
-}
+//void CTestNetDllDlg::OnBnClickedCapimage()
+//{
+//	if(playlist.size()<=0)
+//	{
+//		return ;
+//	}
+//
+//	CPlayerClass * player= playlist[m_lRealHandle];
+//	if(player!=NULL)
+//	{
+//		int RetValue=IP_TPS_CatchPic(player->m_nPlayPort,"c:\\");
+//		if(RetValue)
+//		{
+//			MessageBox(_T("抓图失败"),_T("抓图失败"));
+//		}
+//	}else
+//	{
+//		playlist.erase(m_lRealHandle);
+//	}
+//}
 
 
 
-void CTestNetDllDlg::OnBnClickedZoomin()
-{
-	if(playlist.size()<=0)
-	{
-		return ;
-	}
-	CPlayerClass * player= playlist[m_lRealHandle];
-	if(player!=NULL)
-	{ 
-		int RetValue=IP_TPS_SetZoomRectOn(player->m_nPlayPort ,1);
-	}else
-	{
-		playlist.erase(m_lRealHandle);
-	}
-}
+//void CTestNetDllDlg::OnBnClickedReadsn()
+//{	
+//	CheckCmdIdOk();
+//	LONG ret=IP_NET_DVR_SystemControl(m_nLastCmdId,(long)CMD_GET_SERIALNUMBER,0,"");
+//	if(ret<0)
+//	{
+//		MessageBox(_T("读取SN失败"),_T("读取失败"));
+//	}
+//}
+
+//void CTestNetDllDlg::OnBnClickedDiszoom()
+//{
+//	if(playlist.size()<=0)
+//	{
+//		return ;
+//	}
+//
+//	CPlayerClass * player= playlist[m_lRealHandle];
+//	if(player!=NULL)
+//	{
+//		int RetValue=IP_TPS_SetZoomRectOn(player->m_nPlayPort,0);
+//	}else
+//	{
+//		playlist.erase(m_lRealHandle);
+//	}
+//
+//}
 
 
 
-void CTestNetDllDlg::OnBnClickedZoomout()
-{
-	if(playlist.size()<=0)
-	{
-		return ;
-	}
-	CPlayerClass * player= playlist[m_lRealHandle];
-	if(player!=NULL)
-	{
-		int RetValue=IP_TPS_SetZoomRectOn(player->m_nPlayPort ,2);
-	}else
-	{
-		playlist.erase(m_lRealHandle);
-	}
-}
+//void CTestNetDllDlg::OnBnClickedZoomin()
+//{
+//	if(playlist.size()<=0)
+//	{
+//		return ;
+//	}
+//	CPlayerClass * player= playlist[m_lRealHandle];
+//	if(player!=NULL)
+//	{ 
+//		int RetValue=IP_TPS_SetZoomRectOn(player->m_nPlayPort ,1);
+//	}else
+//	{
+//		playlist.erase(m_lRealHandle);
+//	}
+//}
+
+
+
+//void CTestNetDllDlg::OnBnClickedZoomout()
+//{
+//	if(playlist.size()<=0)
+//	{
+//		return ;
+//	}
+//	CPlayerClass * player= playlist[m_lRealHandle];
+//	if(player!=NULL)
+//	{
+//		int RetValue=IP_TPS_SetZoomRectOn(player->m_nPlayPort ,2);
+//	}else
+//	{
+//		playlist.erase(m_lRealHandle);
+//	}
+//}
 
 
 
 
-void CTestNetDllDlg::OnBnClickedZoommove()
-{
-	if(playlist.size()<=0)
-	{
-		return ;
-	}
-	CPlayerClass * player= playlist[m_lRealHandle];
-	if(player!=NULL)
-	{ 
-		int RetValue=IP_TPS_SetZoomRectOn( player->m_nPlayPort,3);
-	}else
-	{
-		playlist.erase(m_lRealHandle);
-	}
-}
+//void CTestNetDllDlg::OnBnClickedZoommove()
+//{
+//	if(playlist.size()<=0)
+//	{
+//		return ;
+//	}
+//	CPlayerClass * player= playlist[m_lRealHandle];
+//	if(player!=NULL)
+//	{ 
+//		int RetValue=IP_TPS_SetZoomRectOn( player->m_nPlayPort,3);
+//	}else
+//	{
+//		playlist.erase(m_lRealHandle);
+//	}
+//}
 
 
 
-void CTestNetDllDlg::OnBnClickedFullfill()
-{
-	if(playlist.size()<=0)
-	{
-		return ;
-	}
-	
-	CPlayerClass * player= playlist[m_lRealHandle];
-	if(player!=NULL)
-	{ 
-		int nowstatus=IP_TPS_GetFullFillStatus(player->m_nPlayPort);
-		if(nowstatus)
-		{
-			IP_TPS_SetFullFillStatus(player->m_nPlayPort,0);
-		}
-		else
-		{
-			IP_TPS_SetFullFillStatus(player->m_nPlayPort,1);
-		}
-	}else
-	{
-		playlist.erase(m_lRealHandle);
-	}
-	
-}
+//void CTestNetDllDlg::OnBnClickedFullfill()
+//{
+//	if(playlist.size()<=0)
+//	{
+//		return ;
+//	}
+//	
+//	CPlayerClass * player= playlist[m_lRealHandle];
+//	if(player!=NULL)
+//	{ 
+//		int nowstatus=IP_TPS_GetFullFillStatus(player->m_nPlayPort);
+//		if(nowstatus)
+//		{
+//			IP_TPS_SetFullFillStatus(player->m_nPlayPort,0);
+//		}
+//		else
+//		{
+//			IP_TPS_SetFullFillStatus(player->m_nPlayPort,1);
+//		}
+//	}else
+//	{
+//		playlist.erase(m_lRealHandle);
+//	}
+//	
+//}
 
-void CTestNetDllDlg::OnBnClickedSearchipc()
-{
-	m_searchDlg.DoModal();
-}
+//void CTestNetDllDlg::OnBnClickedSearchipc()
+//{
+//	m_searchDlg.DoModal();
+//}
 
 
 
 //选择云台
-void CTestNetDllDlg::OnTvnSelchangedPtzlist(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-	HTREEITEM hItem=m_ptzTreeList.GetSelectedItem();
-	if(hItem!=NULL)
-	{
-		m_nLastCmdId=(LONG)m_ptzTreeList.GetItemData(hItem);
-	}
-	*pResult = 0;
-}
+//void CTestNetDllDlg::OnTvnSelchangedPtzlist(NMHDR *pNMHDR, LRESULT *pResult)
+//{
+//	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+//	HTREEITEM hItem=m_ptzTreeList.GetSelectedItem();
+//	if(hItem!=NULL)
+//	{
+//		m_nLastCmdId=(LONG)m_ptzTreeList.GetItemData(hItem);
+//	}
+//	*pResult = 0;
+//}
 
 
 //开启广播
-void CTestNetDllDlg::OnBnClickedG711audio()
-{
-	//int audiotype, int samplerate, int bitspersample, int channels
-	int error=IP_NET_DVR_StartTalk(0,16000,16,2);
-	if(error)
-	{
-		MessageBox(_T("启动广播失败"));
-	}
-}
+//void CTestNetDllDlg::OnBnClickedG711audio()
+//{
+//	//int audiotype, int samplerate, int bitspersample, int channels
+//	int error=IP_NET_DVR_StartTalk(0,16000,16,2);
+//	if(error)
+//	{
+//		MessageBox(_T("启动广播失败"));
+//	}
+//}
 
-void CTestNetDllDlg::OnBnClickedStopaudo()
-{
-	int error=IP_NET_DVR_StopTalk();
-	if(error)
-	{
-		MessageBox(_T("停止广播失败"));
-	}
-}
+//void CTestNetDllDlg::OnBnClickedStopaudo()
+//{
+//	int error=IP_NET_DVR_StopTalk();
+//	if(error)
+//	{
+//		MessageBox(_T("停止广播失败"));
+//	}
+//}
 
-void CTestNetDllDlg::OnBnClickedAacaudio()
-{
-	int error=IP_NET_DVR_StartTalk(1,16000,16,2);
-	if(error)
-	{
-		MessageBox(_T("启动广播失败"));
-	}
-}
+//void CTestNetDllDlg::OnBnClickedAacaudio()
+//{
+//	int error=IP_NET_DVR_StartTalk(1,16000,16,2);
+//	if(error)
+//	{
+//		MessageBox(_T("启动广播失败"));
+//	}
+//}
 
-void CTestNetDllDlg::OnBnClickedStartipcaudio()
-{	
-	map<LONG,CPTZClass*>::iterator item;
-	item=ptzList.begin();
-	CPTZClass * pItem=NULL;
-	while(item!=ptzList.end())
-	{
-		pItem=item->second;
-		if(m_nLastCmdId==pItem->m_nUserId)
-		{
-			break;
-		}
-		item++;
-	} 
-	if(pItem!=NULL)
-	{
-		if(pItem->m_bAudioIsOn==0)
-		{
-			int error=IP_NET_DVR_StartVoiceCom(m_nLastCmdId,0,1,NULL,NULL);
-			if(error)
-			{
-				MessageBox(_T("关闭失败"));
-			}else
-			{
-				pItem->m_bAudioIsOn=1;
-			}
-		}else
-		{
-			MessageBox(_T("当前设备处于对讲状态，打开失败"));
-		}
-	}
-
-}
-
-
-void CTestNetDllDlg::OnBnClickedStopipcaudio()
-{
-	map<LONG,CPTZClass*>::iterator item;
-	item=ptzList.begin();
-	CPTZClass * pItem=NULL;
-	while(item!=ptzList.end())
-	{
-		pItem=item->second;
-		if(m_nLastCmdId==pItem->m_nUserId)
-		{
-			break;
-		}
-		item++;
-	} 
-	if(pItem!=NULL)
-	{ 
-		int error=IP_NET_DVR_StopVoiceCom(m_nLastCmdId);
-		if(error)
-		{
-			MessageBox(_T("关闭失败"));
-		}
-		pItem->m_bAudioIsOn=0;  
-	}
-}
+//void CTestNetDllDlg::OnBnClickedStartipcaudio()
+//{	
+//	map<LONG,CPTZClass*>::iterator item;
+//	item=ptzList.begin();
+//	CPTZClass * pItem=NULL;
+//	while(item!=ptzList.end())
+//	{
+//		pItem=item->second;
+//		if(m_nLastCmdId==pItem->m_nUserId)
+//		{
+//			break;
+//		}
+//		item++;
+//	} 
+//	if(pItem!=NULL)
+//	{
+//		if(pItem->m_bAudioIsOn==0)
+//		{
+//			int error=IP_NET_DVR_StartVoiceCom(m_nLastCmdId,0,1,NULL,NULL);
+//			if(error)
+//			{
+//				MessageBox(_T("关闭失败"));
+//			}else
+//			{
+//				pItem->m_bAudioIsOn=1;
+//			}
+//		}else
+//		{
+//			MessageBox(_T("当前设备处于对讲状态，打开失败"));
+//		}
+//	}
+//
+//}
 
 
-
-void CTestNetDllDlg::OnBnClickedDownloadconfig()
-{
-	if(m_nLastCmdId!=0)
-	{
-		IP_NET_DVR_GetConfigFile(m_nLastCmdId,"c:\\20110728151435_config.xml");
-	}
-}
+//void CTestNetDllDlg::OnBnClickedStopipcaudio()
+//{
+//	map<LONG,CPTZClass*>::iterator item;
+//	item=ptzList.begin();
+//	CPTZClass * pItem=NULL;
+//	while(item!=ptzList.end())
+//	{
+//		pItem=item->second;
+//		if(m_nLastCmdId==pItem->m_nUserId)
+//		{
+//			break;
+//		}
+//		item++;
+//	} 
+//	if(pItem!=NULL)
+//	{ 
+//		int error=IP_NET_DVR_StopVoiceCom(m_nLastCmdId);
+//		if(error)
+//		{
+//			MessageBox(_T("关闭失败"));
+//		}
+//		pItem->m_bAudioIsOn=0;  
+//	}
+//}
 
 
 
-void CTestNetDllDlg::OnBnClickedAutoviewvideo()
-{
-	int value=GetDlgItemInt(IDC_TIMEVALUE);
-	if(value<3000)
-	{
-		value=3000;
-	}
-	CString butmsg;
-	GetDlgItemText(IDC_AUTOVIEWVIDEO,butmsg);
-	if(butmsg.Compare(_T("开始轮询"))==0)
-	{
-		SetDlgItemText(IDC_AUTOVIEWVIDEO,_T("停止轮询"));
-		SetTimer(200,value,NULL);
-	}else
-	{
-		SetDlgItemText(IDC_AUTOVIEWVIDEO,_T("开始轮询"));
-		KillTimer(200);
-	}
-}
+//void CTestNetDllDlg::OnBnClickedDownloadconfig()
+//{
+//	if(m_nLastCmdId!=0)
+//	{
+//		IP_NET_DVR_GetConfigFile(m_nLastCmdId,"c:\\20110728151435_config.xml");
+//	}
+//}
 
 
 
-void CTestNetDllDlg::OnBnClickedPlayfile()
-{
-	int canreplay=IP_NET_DVR_GetReplayAblity(m_nLastCmdId);
-	if(canreplay==0)
-	{
-		MessageBox(_T("不支持回放功能!"));
-		return;
-	}
-	CString filename;
-	GetDlgItemText(IDC_SELECTFILE,filename);
-	_bstr_t myfile(filename);
-	IP_NET_DVR_PlayDeviceFile(m_nLastCmdId,(char *)myfile);
-}
+//void CTestNetDllDlg::OnBnClickedAutoviewvideo()
+//{
+//	int value=GetDlgItemInt(IDC_TIMEVALUE);
+//	if(value<3000)
+//	{
+//		value=3000;
+//	}
+//	CString butmsg;
+//	GetDlgItemText(IDC_AUTOVIEWVIDEO,butmsg);
+//	if(butmsg.Compare(_T("开始轮询"))==0)
+//	{
+//		SetDlgItemText(IDC_AUTOVIEWVIDEO,_T("停止轮询"));
+//		SetTimer(200,value,NULL);
+//	}else
+//	{
+//		SetDlgItemText(IDC_AUTOVIEWVIDEO,_T("开始轮询"));
+//		KillTimer(200);
+//	}
+//}
+
+
+
+//void CTestNetDllDlg::OnBnClickedPlayfile()
+//{
+//	int canreplay=IP_NET_DVR_GetReplayAblity(m_nLastCmdId);
+//	if(canreplay==0)
+//	{
+//		MessageBox(_T("不支持回放功能!"));
+//		return;
+//	}
+//	CString filename;
+//	GetDlgItemText(IDC_SELECTFILE,filename);
+//	_bstr_t myfile(filename);
+//	IP_NET_DVR_PlayDeviceFile(m_nLastCmdId,(char *)myfile);
+//}
 
 
 
@@ -2517,114 +2522,114 @@ LONG   CTestNetDllDlg::OnPlayActionEvent(LONG lUser,LONG nType,LONG nFlag,char *
 }
 
 
-
-void CTestNetDllDlg::OnNMClickTree1(NMHDR *pNMHDR, LRESULT *pResult)
-{	
-	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-	HTREEITEM hItem=m_ListViewTree.GetSelectedItem();
-	if(hItem)
-	{
-		m_SwitchFromlRealHandle=m_lRealHandle;
-		m_lRealHandle=(LONG)m_ListViewTree.GetItemData(hItem);
-		if(m_lRealHandle)
-		{
-			CPlayerClass * player1=playlist[m_SwitchFromlRealHandle];
-			CPlayerClass * player2=playlist[m_lRealHandle];
-			//IP_TPS_SwitchVideo(player1->m_nPlayPort,player2->m_nPlayPort);
-			if(player1)
-			{
-				IP_TPS_SetVideoOn(player1->m_nPlayPort,0);
-			}
-			if(player2)
-			{
-				IP_TPS_SetVideoOn(player2->m_nPlayPort,1);
-				IP_TPS_PlaySound(player2->m_nPlayPort);
-			}
-		}
-	}
-	*pResult = 0;
-}
-
-
-
-void CTestNetDllDlg::OnBnClickedConfigipc()
-{	
-	/*if(m_nLastCmdId<=0)
-	{
-		MessageBox(_T("请选择要配置的设备!"));
-		return ;
-	}*/
-	m_configDlg.DoModal();
-}
+//
+//void CTestNetDllDlg::OnNMClickTree1(NMHDR *pNMHDR, LRESULT *pResult)
+//{	
+//	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+//	HTREEITEM hItem=m_ListViewTree.GetSelectedItem();
+//	if(hItem)
+//	{
+//		m_SwitchFromlRealHandle=m_lRealHandle;
+//		m_lRealHandle=(LONG)m_ListViewTree.GetItemData(hItem);
+//		if(m_lRealHandle)
+//		{
+//			CPlayerClass * player1=playlist[m_SwitchFromlRealHandle];
+//			CPlayerClass * player2=playlist[m_lRealHandle];
+//			//IP_TPS_SwitchVideo(player1->m_nPlayPort,player2->m_nPlayPort);
+//			if(player1)
+//			{
+//				IP_TPS_SetVideoOn(player1->m_nPlayPort,0);
+//			}
+//			if(player2)
+//			{
+//				IP_TPS_SetVideoOn(player2->m_nPlayPort,1);
+//				IP_TPS_PlaySound(player2->m_nPlayPort);
+//			}
+//		}
+//	}
+//	*pResult = 0;
+//}
 
 
-void CTestNetDllDlg::OnBnClickedCapbyfile()
-{
-	if(playlist.size()<=0)
-	{
-		return ;
-	}
-	CPlayerClass * player= playlist[m_lRealHandle];
-	if(player!=NULL)
-	{
-		int RetValue=IP_TPS_CatchPicByFileName(player->m_nPlayPort,"c:\\test.bmp",0);
-		if(RetValue)
-		{
-			MessageBox(_T("文件抓图失败"),_T("抓图失败"));
-		}
-	}else
-	{
-		playlist.erase(m_lRealHandle);
-	}
-}
 
-void CTestNetDllDlg::OnBnClickedCreateiframe()
-{
-	if(m_nLastCmdId!=0)
-	{
-		IP_NET_DVR_CreateIFrame(m_nLastCmdId,0);//主码流产生一个I帧
-		//IP_NET_DVR_CreateIFrame(m_nLastCmdId,1);//子码流产生一个I帧
-	}
-	IP_NET_DVR_Reconnect(m_nLastCmdId);
-}
+//void CTestNetDllDlg::OnBnClickedConfigipc()
+//{	
+//	/*if(m_nLastCmdId<=0)
+//	{
+//		MessageBox(_T("请选择要配置的设备!"));
+//		return ;
+//	}*/
+//	m_configDlg.DoModal();
+//}
 
 
-void CTestNetDllDlg::OnBnClickedSaveuserdata()
-{
-	if(m_nLastCmdId!=0)
-	{//char * pOutBuffer,int* nInOutLen
-		int maxcount=102400;
-		char buffer[102400];
-		IP_NET_DVR_GetUserData(m_nLastCmdId,buffer,&maxcount);
-		if(maxcount>0)
-		{
-			SetDlgItemText(IDC_USERDATA,_bstr_t(buffer));
-		}
-		else
-		{
-			SetDlgItemText(IDC_USERDATA,_bstr_t("读取用户数据失败"));
-		}
-		int len=0;
-	}
-}
+//void CTestNetDllDlg::OnBnClickedCapbyfile()
+//{
+//	if(playlist.size()<=0)
+//	{
+//		return ;
+//	}
+//	CPlayerClass * player= playlist[m_lRealHandle];
+//	if(player!=NULL)
+//	{
+//		int RetValue=IP_TPS_CatchPicByFileName(player->m_nPlayPort,"c:\\test.bmp",0);
+//		if(RetValue)
+//		{
+//			MessageBox(_T("文件抓图失败"),_T("抓图失败"));
+//		}
+//	}else
+//	{
+//		playlist.erase(m_lRealHandle);
+//	}
+//}
+
+//void CTestNetDllDlg::OnBnClickedCreateiframe()
+//{
+//	if(m_nLastCmdId!=0)
+//	{
+//		IP_NET_DVR_CreateIFrame(m_nLastCmdId,0);//主码流产生一个I帧
+//		//IP_NET_DVR_CreateIFrame(m_nLastCmdId,1);//子码流产生一个I帧
+//	}
+//	IP_NET_DVR_Reconnect(m_nLastCmdId);
+//}
 
 
-void CTestNetDllDlg::OnBnClickedSetuserdata()
-{
-	if(m_nLastCmdId!=0)
-	{
-		CString buffer;
-		GetDlgItemText(IDC_USERDATA,buffer);
-		_bstr_t buf(buffer);
-		IP_NET_DVR_SetUserData(m_nLastCmdId,(char *)buf,buf.length());
-	}
-}
+//void CTestNetDllDlg::OnBnClickedSaveuserdata()
+//{
+//	if(m_nLastCmdId!=0)
+//	{//char * pOutBuffer,int* nInOutLen
+//		int maxcount=102400;
+//		char buffer[102400];
+//		IP_NET_DVR_GetUserData(m_nLastCmdId,buffer,&maxcount);
+//		if(maxcount>0)
+//		{
+//			SetDlgItemText(IDC_USERDATA,_bstr_t(buffer));
+//		}
+//		else
+//		{
+//			SetDlgItemText(IDC_USERDATA,_bstr_t("读取用户数据失败"));
+//		}
+//		int len=0;
+//	}
+//}
 
 
-void CTestNetDllDlg::OnBnClickedTest()
-{
-	readIpcConfig.DoModal();
-}
+//void CTestNetDllDlg::OnBnClickedSetuserdata()
+//{
+//	if(m_nLastCmdId!=0)
+//	{
+//		CString buffer;
+//		GetDlgItemText(IDC_USERDATA,buffer);
+//		_bstr_t buf(buffer);
+//		IP_NET_DVR_SetUserData(m_nLastCmdId,(char *)buf,buf.length());
+//	}
+//}
+
+
+//void CTestNetDllDlg::OnBnClickedTest()
+//{
+//	readIpcConfig.DoModal();
+//}
 
 
 //void CTestNetDllDlg::OnClickedButtonTest1()
