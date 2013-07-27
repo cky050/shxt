@@ -170,11 +170,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CDIPCConfigOcx.cpp" />
-    <ClCompile Include="IpcConfigTestDlg.cpp" />
-    <ClCompile Include="IpcSearchDlg.cpp" />
     <ClCompile Include="PlayerClass.cpp" />
     <ClCompile Include="PTZClass.cpp" />
-    <ClCompile Include="ReadIpcConfig.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='LibRelease|Win32'">Create</PrecompiledHeader>
@@ -182,31 +179,21 @@
     </ClCompile>
     <ClCompile Include="TestNetDll.cpp" />
     <ClCompile Include="TestNetDllDlg.cpp" />
-    <ClCompile Include="tinystr.cpp" />
-    <ClCompile Include="tinyxml.cpp" />
-    <ClCompile Include="tinyxmlerror.cpp" />
-    <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="WavFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CDIPCConfigOcx.h" />
-    <ClInclude Include="IpcConfigTestDlg.h" />
-    <ClInclude Include="IpcSearchDlg.h" />
     <ClInclude Include="PlayerClass.h" />
     <ClInclude Include="PTZClass.h" />
-    <ClInclude Include="ReadIpcConfig.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TestNetDll.h" />
     <ClInclude Include="TestNetDllDlg.h" />
-    <ClInclude Include="tinystr.h" />
-    <ClInclude Include="tinyxml.h" />
     <ClInclude Include="WavFile.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\TestNetDll.ico" />
     <None Include="res\TestNetDll.rc2" />
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TestNetDll.rc" />

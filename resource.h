@@ -4,8 +4,6 @@
 //
 #define IDD_TESTNETDLL_DIALOG           102
 #define IDR_MAINFRAME                   128
-#define IDD_IPCSEARCH                   129
-#define IDD_IPCCONFIGREADER             131
 #define IDC_TREE1                       1001
 #define IDC_ADD                         1002
 #define IDC_PTZIP                       1003
@@ -27,7 +25,6 @@
 #define IDC_CR                          1019
 #define IDC_H                           1020
 #define IDC_SAVECONFIG                  1021
-#define IDC_READCONFIG                  1022
 #define IDC_ADDPRESET                   1024
 #define IDC_PRESET                      1025
 #define IDC_CALLPRESET                  1026
@@ -54,11 +51,6 @@
 #define IDC_ZOOMMOVE                    1051
 #define IDC_FULLFILL                    1052
 #define IDC_SEARCHIPC                   1053
-#define IDC_STARTSEARCH                 1055
-#define IDC_LIST1                       1056
-#define IDC_ALLCOUNTMSG                 1057
-#define IDC_MODIFY1                     1058
-#define IDC_MODIFY2                     1059
 #define IDC_G711AUDIO                   1059
 #define IDC_STOPAUDO                    1060
 #define IDC_AACAUDIO                    1061
@@ -72,29 +64,13 @@
 #define IDC_STOPPLAY                    1068
 #define IDC_TIMEVALUE                   1069
 #define IDC_CONFIGIPC                   1070
-#define IDC_BUTTON1                     1071
-#define IDC_CONNECT                     1071
 #define IDC_CAPBYFILE                   1072
 #define IDC_CREATEIFRAME                1073
 #define IDC_USERDATA                    1074
 #define IDC_TEST                        1075
-#define IDC_RETTXT                      1076
-#define IDC_CONFIGID                    1078
-#define IDC_COMTROLVALUE                1080
-#define IDC_XMLMSG                      1081
-#define IDC_SYSTEMCONTROL               1082
 #define IDC_BUTTONTEST1                 1083
 #define IDC_BUTTONTEST2                 1084
-#define IDD_CONFIGIPCDLG                1088
-#define IDD_TESTIPCCONFIG_DIALOG        1089
-#define IDC_IP                          1091
-#define IDC_PORT                        1092
-#define IDC_USRE                        1093
-#define IDC_PASS                        1094
-#define IDC_RELOAD                      1095
-#define IDC_CH                          1096
 #define IDC_BUTTON3                     1097
-#define IDC_EN                          1097
 #define IDC_SAVEUSERDATA                1097
 #define IDC_SETUSERDATA                 1098
 
