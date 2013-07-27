@@ -5,7 +5,6 @@
 #define IDD_TESTNETDLL_DIALOG           102
 #define IDR_MAINFRAME                   128
 #define IDC_TREE1                       1001
-#define IDC_ADD                         1002
 #define IDC_PTZIP                       1003
 #define IDC_PTZPORT                     1004
 #define IDC_PTZUSER                     1005
@@ -20,15 +19,9 @@
 #define IDC_UP                          1014
 #define IDC_DOWN                        1015
 #define IDC_PTZLIST                     1016
-#define IDC_B                           1017
-#define IDC_CB                          1018
-#define IDC_CR                          1019
 #define IDC_H                           1020
 #define IDC_SAVECONFIG                  1021
-#define IDC_ADDPRESET                   1024
 #define IDC_PRESET                      1025
-#define IDC_CALLPRESET                  1026
-#define IDC_COMBO2                      1027
 #define IDC_DELPRESET                   1028
 #define IDC_LASTALARMTEXT               1029
 #define IDC_SEARCHLOG                   1030
@@ -43,7 +36,6 @@
 #define IDC_STOPUPLOAD                  1043
 #define IDC_STOPDOWN                    1044
 #define IDC_SEARCHAVI                   1045
-#define IDC_CAPIMAGE                    1046
 #define IDC_READSN                      1047
 #define IDC_DISZOOM                     1048
 #define IDC_ZOOMIN                      1049
@@ -53,24 +45,15 @@
 #define IDC_SEARCHIPC                   1053
 #define IDC_G711AUDIO                   1059
 #define IDC_STOPAUDO                    1060
-#define IDC_AACAUDIO                    1061
 #define IDC_STARTIPCAUDIO               1062
-#define IDC_BUTTON7                     1063
 #define IDC_STOPIPCAUDIO                1063
 #define IDC_DOWNLOADCONFIG              1064
-#define IDC_AUTOVIEWVIDEO               1065
 #define IDC_PLAYFILE                    1066
 #define IDC_INCLUDEAUDIO                1067
 #define IDC_STOPPLAY                    1068
 #define IDC_TIMEVALUE                   1069
-#define IDC_CONFIGIPC                   1070
-#define IDC_CAPBYFILE                   1072
-#define IDC_CREATEIFRAME                1073
 #define IDC_USERDATA                    1074
 #define IDC_TEST                        1075
-#define IDC_BUTTONTEST1                 1083
-#define IDC_BUTTONTEST2                 1084
-#define IDC_BUTTON3                     1097
 #define IDC_SAVEUSERDATA                1097
 #define IDC_SETUSERDATA                 1098
 
